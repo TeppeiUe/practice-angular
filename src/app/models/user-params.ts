@@ -1,3 +1,5 @@
+import { Tweet } from "./tweet-params";
+
 export interface UserInfo {
   user: User | null;
 }
@@ -11,5 +13,6 @@ export interface User {
   user_name: string;
   profile?: string;
   image?: string;
-  created_at: Date;
+  created_at?: Date;
+  tweets?: Tweet[] | [];
 }

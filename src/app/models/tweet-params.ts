@@ -1,3 +1,5 @@
+import { User } from "./user-params";
+
 export interface TweetList {
   tweets: Tweet[] | [];
 }
@@ -13,4 +15,6 @@ export interface Tweet {
   user_name: string;
   user_id: number;
   created_at: Date;
+  user?: User;
+  favorites?: User[] | [];
 }

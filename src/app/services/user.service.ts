@@ -13,9 +13,8 @@ export class UserService {
     private http: HttpClient,
   ) { }
 
-  getUserInfo(user_id: number): Observable<User|null> {
+  public getUserInfo(user_id: number): Observable<User|null> {
     const subject = new Subject<User|null>();
-    const params = { user_id };
     const subscription = this.http.get<UserInfo>(
       environment.apiUrl + '/user/' + user_id , {
         observe: 'response'
@@ -32,7 +31,7 @@ export class UserService {
   }
 
 
-  getUserList(): Observable<User[]|[]> {
+  public getUserList(): Observable<User[]|[]> {
     const subject = new Subject<User[]|[]>();
     const subscription = this.http.get<UserList>(
       environment.apiUrl + '/users', {
@@ -42,7 +41,7 @@ export class UserService {
       next: res => subject.next(res.body?.users ?? []),
       error: () => subject.next([]),
       complete: () => {
-        // subscription.unsubscribe();
+        subscription.unsubscribe();
       }
     });
 

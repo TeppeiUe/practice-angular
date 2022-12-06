@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User, UserInfo, UserList } from '../models/user-params';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,29 @@ export class UserService {
   constructor(
     private http: HttpClient,
   ) { }
+
+  public addUser(user: User): Observable<User|null> {
+    const subject = new Subject<User|null>();
+    const subscription = this.http.post<UserInfo>(
+      environment.apiUrl + '/user',
+      user, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        observe: 'response',
+        withCredentials: true,  // Cookieを受け取るために必要
+      }
+    ).subscribe({
+      next: res => subject.next(res.body?.user ?? null),
+      error: () => subject.next(null),
+      complete: () => {
+        subscription.unsubscribe();
+      }
+    });
+
+    return subject.asObservable()
+  }
+
 
   public getUserInfo(user_id: number): Observable<User|null> {
     const subject = new Subject<User|null>();

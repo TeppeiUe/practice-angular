@@ -1,1 +1,20 @@
-<p>signup works!</p>
+<form
+  (ngSubmit)="addUser()"
+  [formGroup]="userForm">
+  <input
+    type="text"
+    formControlName="user_name"
+    placeholder="user_name">
+  <input
+    type="text"
+    formControlName="email"
+    placeholder="email"
+    required>
+  <input
+    type="password"
+    formControlName="password"
+    placeholder="password">
+
+  <button>signup</button>
+</form>
+<a routerLink="/login">login</a>

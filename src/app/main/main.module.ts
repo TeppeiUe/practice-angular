@@ -9,6 +9,8 @@ import { TweetListComponent } from './tweet-list/tweet-list.component';
 import { TweetInfoComponent } from './tweet-info/tweet-info.component';
 import { HomeComponent } from './home/home.component';
 import { NavModule } from '../nav/nav.module';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,12 +20,14 @@ import { NavModule } from '../nav/nav.module';
     UserInfoComponent,
     TweetListComponent,
     TweetInfoComponent,
-    HomeComponent
+    HomeComponent,
+    UserEditComponent
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
-    NavModule
+    NavModule,
+    ReactiveFormsModule
   ]
 })
 export class MainModule { }

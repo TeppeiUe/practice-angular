@@ -1,0 +1,21 @@
+<form
+  [formGroup]="userForm">
+  <input
+    type="text"
+    formControlName="user_name"
+    placeholder="user_name">
+  <input
+    type="textarea"
+    formControlName="profile"
+    placeholder="profile">
+  <input
+    type="text"
+    formControlName="image"
+    hidden>
+  <input
+    type="file"
+    formControlName="tmp"
+    (change)="onFileChange($event)"
+    accept="image/jpeg, image/png">
+</form>
+<button (click)="updateUser()">update</button>

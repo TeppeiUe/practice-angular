@@ -9,6 +9,7 @@ import {
   of,
   Subject,
   switchMap,
+  take,
   tap
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -30,7 +31,7 @@ export class AuthService {
   ) { }
 
   get user$() {
-    return this._user$.asObservable()
+    return this._user$.asObservable().pipe(take(1))
   }
 
   setUser(user: User|null) {

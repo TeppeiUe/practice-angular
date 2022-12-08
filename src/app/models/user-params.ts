@@ -9,7 +9,7 @@ export interface UserList {
 }
 
 export interface User {
-  id: number;
+  id?: number;
   user_name: string;
   profile?: string;
   image?: string;

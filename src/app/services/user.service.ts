@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User, UserInfo, UserList } from '../models/user-params';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -69,5 +69,21 @@ export class UserService {
     });
 
     return subject.asObservable()
+  }
+
+
+  modifyUserInfo(user: User): Observable<boolean> {
+    return this.http.put(
+      environment.apiUrl + '/user',
+      user, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        observe: 'response',
+        withCredentials: true,
+      }
+    ).pipe(
+      switchMap(res => of(res.status === 204))
+    )
   }
 }

@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SideMenuComponent implements OnInit {
 
   constructor(
-    private authService: AuthService,
+    public auth: AuthService, // to confirm update contents at html view
     private router: Router,
   ) { }
 
@@ -18,7 +18,7 @@ export class SideMenuComponent implements OnInit {
   }
 
   public logout(): void {
-    this.authService.logout().subscribe(isLogout => {
+    this.auth.logout().subscribe(isLogout => {
       if (isLogout) this.router.navigate(['login'])
     })
   }

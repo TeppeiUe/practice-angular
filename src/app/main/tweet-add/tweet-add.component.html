@@ -1,0 +1,7 @@
+<form [formGroup]="tweetForm">
+  <input
+    type="textarea"
+    formControlName="message"
+    placeholder="message">
+</form>
+<button (click)="addTweet()">tweet</button>

@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, of, Subject, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Tweet, TweetInfo, TweetList } from '../models/tweet-params';
 
@@ -12,6 +12,22 @@ export class TweetService {
   constructor(
     private http: HttpClient,
   ) { }
+
+  public addTweet(tweet: Tweet) {
+    return this.http.post<TweetInfo>(
+      environment.apiUrl + '/tweet',
+      tweet, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        observe: 'response',
+        withCredentials: true,
+      }
+    ).pipe(
+      switchMap(res => of(res.status === 201 ? res.body?.tweet ?? null : null)),
+    )
+  }
+
 
   public getTweetInfo(tweet_id: number): Observable<Tweet|null> {
     const subject = new Subject<Tweet|null>();

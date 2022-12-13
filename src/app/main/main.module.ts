@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { NavModule } from '../nav/nav.module';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TweetAddComponent } from './tweet-add/tweet-add.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TweetListComponent,
     TweetInfoComponent,
     HomeComponent,
-    UserEditComponent
+    UserEditComponent,
+    TweetAddComponent
   ],
   imports: [
     CommonModule,

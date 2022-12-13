@@ -32,20 +32,20 @@ export class UserInfoComponent implements OnInit {
       this.user_id = Number(params.get('id') ?? null);
     });
 
-    // this.userService.getUserInfo(this.user_id)
-    // .subscribe(user => {
-    //   this.userInfo = user;
-    //   if (user) this.tweetList = user.tweets ?? [];
-    // })
+    this.userService.getUserInfo(this.user_id)
+    .subscribe(user => {
+      this.userInfo = user;
+      if (user) this.tweetList = user.tweets ?? [];
+    })
 
-    this.followService.getUserFollowingList(this.user_id)
-    .subscribe(users => this.userList = users);
+    // this.followService.getUserFollowingList(this.user_id)
+    // .subscribe(users => this.userList = users);
 
     // this.followService.getUserFollowerList(this.user_id)
     // .subscribe(users => this.userList = users);
 
-    this.favoriteService.getUserFavoriteList(this.user_id)
-    .subscribe(tweets => this.tweetList = tweets)
+    // this.favoriteService.getUserFavoriteList(this.user_id)
+    // .subscribe(tweets => this.tweetList = tweets)
   }
 
 }

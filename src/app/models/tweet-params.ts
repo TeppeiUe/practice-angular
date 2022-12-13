@@ -12,7 +12,7 @@ export interface TweetInfo {
 export interface Tweet {
   id: number;
   message: string;
-  user_name: string;
+  user_name?: string;
   user_id: number;
   created_at: Date;
   user?: User;

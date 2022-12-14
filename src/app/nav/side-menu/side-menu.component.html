@@ -1,2 +1,26 @@
-{{ auth.user$ | async | json }}
-<button (click)="logout()">logout</button>
+<mat-nav-list>
+  <a mat-list-item href="tweets">
+    <mat-icon>forum</mat-icon>
+    tweets
+  </a>
+  <a mat-list-item href="users">
+    <mat-icon>people</mat-icon>
+    users
+  </a>
+    <a mat-list-item href="/">
+    <mat-icon>home</mat-icon>
+    my page
+  </a>
+  <a mat-list-item>
+    <mat-icon>add</mat-icon>
+    tweet
+  </a>
+  <a mat-list-item>
+    <mat-icon>edit</mat-icon>
+    profile edit
+  </a>
+  <a mat-list-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    logout
+  </a>
+</mat-nav-list>

@@ -1,0 +1,7 @@
+.container {
+  height: calc(100% - var(--header-height));
+  .side-content {
+    width: 20vw;
+    max-width: 300px;
+  }
+}

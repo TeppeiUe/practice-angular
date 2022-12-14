@@ -13,6 +13,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TweetAddComponent } from './tweet-add/tweet-add.component';
 
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { TweetAddComponent } from './tweet-add/tweet-add.component';
     CommonModule,
     MainRoutingModule,
     NavModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSidenavModule,
   ]
 })
 export class MainModule { }

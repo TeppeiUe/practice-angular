@@ -1,0 +1,23 @@
+{
+  "TWEET": {
+    "ADD": "ツイート",
+    "LIST": "ツイート一覧",
+    "MESSAGE": "メッセージ",
+    "CREATED_AT": "作成日"
+  },
+  "USER": {
+    "ADD": "新規登録",
+    "LIST": "ユーザー一覧",
+    "EDIT": "プロフィール編集",
+    "HOME": "プロフィール",
+    "EMAIL": "メールアドレス",
+    "PASSWORD": "パスワード",
+    "USER_NAME": "ユーザー名",
+    "PROFILE": "プロフィール",
+    "CREATED_AT": "開始日"
+  },
+  "AUTH": {
+    "LOGIN": "ログイン",
+    "LOGOUT": "ログアウト"
+  }
+}

@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TweetAddComponent } from './tweet-add/tweet-add.component';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     NavModule,
     ReactiveFormsModule,
     MatSidenavModule,
+    TranslateModule
   ]
 })
 export class MainModule { }

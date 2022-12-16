@@ -2,12 +2,12 @@
   <input
     type="email"
     formControlName="email"
-    placeholder="email">
+    placeholder="{{ 'USER.EMAIL' | translate }}">
   <input
     type="password"
     formControlName="password"
-    placeholder="password">
+    placeholder="{{ 'USER.PASSWORD' | translate }}">
 
-  <button>login</button>
+  <button>{{ 'AUTH.LOGIN' | translate }}</button>
 </form>
-<a routerLink="/signup">signup</a>
+<a routerLink="/signup">{{ 'USER.ADD' | translate }}</a>

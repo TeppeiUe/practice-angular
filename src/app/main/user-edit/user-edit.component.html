@@ -3,11 +3,11 @@
   <input
     type="text"
     formControlName="user_name"
-    placeholder="user_name">
+    placeholder="{{ 'USER.USER_NAME' | translate }}">
   <input
     type="textarea"
     formControlName="profile"
-    placeholder="profile">
+    placeholder="{{ 'USER.PROFILE' | translate }}">
   <input
     type="text"
     formControlName="image"
@@ -18,4 +18,4 @@
     (change)="onFileChange($event)"
     accept="image/jpeg, image/png">
 </form>
-<button (click)="updateUser()">update</button>
+<button (click)="updateUser()">{{ 'USER.EDIT' | translate }}</button>

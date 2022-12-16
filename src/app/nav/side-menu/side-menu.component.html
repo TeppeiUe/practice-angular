@@ -1,26 +1,26 @@
 <mat-nav-list>
   <a mat-list-item href="tweets">
     <mat-icon>forum</mat-icon>
-    tweets
+    {{ 'TWEET.LIST' | translate }}
   </a>
   <a mat-list-item href="users">
     <mat-icon>people</mat-icon>
-    users
+    {{ 'USER.LIST' | translate }}
   </a>
     <a mat-list-item href="/">
     <mat-icon>home</mat-icon>
-    my page
+    {{ 'USER.HOME' | translate }}
   </a>
   <a mat-list-item>
     <mat-icon>add</mat-icon>
-    tweet
+    {{ 'TWEET.ADD' | translate }}
   </a>
   <a mat-list-item>
     <mat-icon>edit</mat-icon>
-    profile edit
+    {{ 'USER.EDIT' | translate }}
   </a>
   <a mat-list-item (click)="logout()">
     <mat-icon>logout</mat-icon>
-    logout
+    {{ 'AUTH.LOGOUT' | translate }}
   </a>
 </mat-nav-list>

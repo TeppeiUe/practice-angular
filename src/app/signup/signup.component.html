@@ -4,17 +4,17 @@
   <input
     type="text"
     formControlName="user_name"
-    placeholder="user_name">
+    placeholder="{{ 'USER.USER_NAME' | translate }}">
   <input
     type="text"
     formControlName="email"
-    placeholder="email"
+    placeholder="{{ 'USER.EMAIL' | translate }}"
     required>
   <input
     type="password"
     formControlName="password"
-    placeholder="password">
+    placeholder="{{ 'USER.PASSWORD' | translate }}">
 
-  <button>signup</button>
+  <button>{{ 'USER.ADD' | translate }}</button>
 </form>
-<a routerLink="/login">login</a>
+<a routerLink="/login">{{ 'AUTH.LOGOUT' | translate }}</a>

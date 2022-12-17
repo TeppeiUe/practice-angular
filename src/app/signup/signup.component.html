@@ -1,20 +1,65 @@
-<form
-  (ngSubmit)="addUser()"
-  [formGroup]="userForm">
-  <input
-    type="text"
-    formControlName="user_name"
-    placeholder="{{ 'USER.USER_NAME' | translate }}">
-  <input
-    type="text"
-    formControlName="email"
-    placeholder="{{ 'USER.EMAIL' | translate }}"
-    required>
-  <input
-    type="password"
-    formControlName="password"
-    placeholder="{{ 'USER.PASSWORD' | translate }}">
+<div class="container" fxLayout="column" fxLayoutAlign="center">
+  <mat-card>
+    <mat-card-title>{{ 'USER.ADD' | translate }}</mat-card-title>
+    <mat-card-content>
+      <form
+        fxLayout="column"
+        (ngSubmit)="addUser()"
+        [formGroup]="userForm">
+        <mat-form-field>
+          <input
+            matInput
+            matType="text"
+            type="text"
+            formControlName="user_name"
+            placeholder="{{ 'USER.USER_NAME' | translate }}">
+          <mat-error *ngIf="user_name?.errors !== null && user_name?.errors?.['required'] === true">
+            {{ 'USER.USER_NAME' | translate }}
+            {{ 'VALIDATOR.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
 
-  <button>{{ 'USER.ADD' | translate }}</button>
-</form>
-<a routerLink="/login">{{ 'AUTH.LOGOUT' | translate }}</a>
+        <mat-form-field>
+          <input
+            matInput
+            matType="text"
+            type="text"
+            formControlName="email"
+            placeholder="{{ 'USER.EMAIL' | translate }}"
+            required>
+          <mat-error *ngIf="email?.errors !== null && email?.errors?.['required'] === true">
+            {{ 'USER.EMAIL' | translate }}
+            {{ 'VALIDATOR.REQUIRED' | translate }}
+          </mat-error>
+          <mat-error *ngIf="email?.errors !== null && email?.errors?.['email'] === true">
+            {{ 'USER.EMAIL' | translate }}
+            {{ 'VALIDATOR.INVALID' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            matType="password"
+            type="password"
+            formControlName="password"
+            placeholder="{{ 'USER.PASSWORD' | translate }}">
+          <mat-error *ngIf="password?.errors !== null && password?.errors?.['required'] === true">
+            {{ 'USER.PASSWORD' | translate }}
+            {{ 'VALIDATOR.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" [disabled]="userForm.invalid">
+            {{ 'USER.ADD' | translate }}
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+
+    <mat-card-content>
+      <a routerLink="/login">{{ 'AUTH.LOGIN' | translate }}</a>
+    </mat-card-content>
+  </mat-card>
+</div>

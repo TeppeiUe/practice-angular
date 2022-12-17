@@ -26,6 +26,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
+  get user_name() { return this.userForm.get('user_name') }
+  get email() { return this.userForm.get('email') }
+  get password() { return this.userForm.get('password') }
+
   public addUser(): void {
     this.subscriptions.add(
       this.userService.addUser(this.userForm.value).subscribe(user => {

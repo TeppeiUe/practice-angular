@@ -19,5 +19,9 @@
   "AUTH": {
     "LOGIN": "ログイン",
     "LOGOUT": "ログアウト"
+  },
+  "VALIDATOR": {
+    "REQUIRED": "は必須項目です。",
+    "INVALID": "が不正です。"
   }
 }

@@ -1,7 +1,4 @@
-.container {
-  height: calc(100% - var(--header-height));
-  .side-content {
+.side-content {
     width: 20vw;
-    max-width: 300px;
-  }
+  max-width: 300px;
 }

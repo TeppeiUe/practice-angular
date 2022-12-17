@@ -1,13 +1,61 @@
-<form (ngSubmit)="login()" [formGroup]="userForm">
-  <input
-    type="email"
-    formControlName="email"
-    placeholder="{{ 'USER.EMAIL' | translate }}">
-  <input
-    type="password"
-    formControlName="password"
-    placeholder="{{ 'USER.PASSWORD' | translate }}">
+<div class="container" fxLayout="column" fxLayoutAlign="center">
+  <mat-card>
+    <mat-card-title>{{ 'AUTH.LOGIN' | translate }}</mat-card-title>
+    <mat-card-content>
+      <form
+        fxLayout="column"
+        (ngSubmit)="login()"
+        [formGroup]="userForm">
+        <mat-form-field>
+          <input
+            matInput
+            matType="email"
+            type="email"
+            formControlName="email"
+            placeholder="{{ 'USER.EMAIL' | translate }}"
+            required>
+          <mat-error
+            *ngIf="email?.errors !== null
+              && email?.errors?.['required'] === true">
+            {{ 'USER.EMAIL' | translate }}
+            {{ 'VALIDATOR.REQUIRED' | translate }}
+          </mat-error>
+          <mat-error
+            *ngIf="email?.errors !== null
+              && email?.errors?.['email'] === true">
+            {{ 'USER.EMAIL' | translate }}
+            {{ 'VALIDATOR.INVALID' | translate }}
+          </mat-error>
+        </mat-form-field>
 
-  <button>{{ 'AUTH.LOGIN' | translate }}</button>
-</form>
-<a routerLink="/signup">{{ 'USER.ADD' | translate }}</a>
+        <mat-form-field>
+          <input
+            matInput
+            matType="password"
+            type="password"
+            formControlName="password"
+            placeholder="{{ 'USER.PASSWORD' | translate }}">
+          <mat-error
+            *ngIf="password?.errors !== null
+              && password?.errors?.['required'] === true">
+            {{ 'USER.PASSWORD' | translate }}
+            {{ 'VALIDATOR.REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="userForm.invalid">
+            {{ 'AUTH.LOGIN' | translate }}
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+
+    <mat-card-content>
+      <a routerLink="/signup">{{ 'USER.ADD' | translate }}</a>
+    </mat-card-content>
+  </mat-card>
+</div>

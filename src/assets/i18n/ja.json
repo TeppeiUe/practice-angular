@@ -14,6 +14,7 @@
     "PASSWORD": "パスワード",
     "USER_NAME": "ユーザー名",
     "PROFILE": "プロフィール",
+    "IMAGE": "プロフィール画像",
     "CREATED_AT": "開始日"
   },
   "AUTH": {
@@ -23,5 +24,9 @@
   "VALIDATOR": {
     "REQUIRED": "は必須項目です。",
     "INVALID": "が不正です。"
+  },
+  "SHARE": {
+    "UPDATE": "更新",
+    "CANCEL": "キャンセル"
   }
 }

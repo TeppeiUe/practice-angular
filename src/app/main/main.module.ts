@@ -14,6 +14,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TweetAddComponent } from './tweet-add/tweet-add.component';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+// npm i -s --legacy-peer-deps ngx-material-file-input
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -34,6 +42,13 @@ import { TranslateModule } from '@ngx-translate/core';
     NavModule,
     ReactiveFormsModule,
     MatSidenavModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MaterialFileInputModule,
+    FlexLayoutModule,
     TranslateModule
   ]
 })

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -20,6 +21,7 @@ export class UserEditComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     private auth: AuthService,
+    private dialogRef: MatDialogRef<UserEditComponent>,
   ) {
     this.auth.user$.subscribe(user => {
       console.log(user);
@@ -34,6 +36,8 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  get user_name() { return this.userForm.get('user_name') }
 
   public updateUser(): void {
     const { user_name, profile, image } = this.userForm.value;
@@ -51,6 +55,12 @@ export class UserEditComponent implements OnInit {
         });
       }
     });
+
+    this.dialogRef.close();
+  }
+
+  public cancel(): void {
+    this.dialogRef.close();
   }
 
   public onFileChange(event: Readonly<Event>) {

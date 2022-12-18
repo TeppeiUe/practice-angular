@@ -26,6 +26,15 @@
         type="textarea"
         formControlName="profile"
         placeholder="{{ 'USER.PROFILE' | translate }}">
+      <mat-error>
+        {{ 'USER.PROFILE' | translate }}
+        {{
+          'VALIDATOR.LESS_THAN' |
+          translate: {
+            val: profile?.errors?.['maxlength']?.['requiredLength']
+          }
+        }}
+      </mat-error>
     </mat-form-field>
 
     <input

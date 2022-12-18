@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UserEditComponent implements OnInit {
   public userForm: FormGroup = this.fb.group({
     user_name: ['', Validators.required],
-    profile: [''],
+    profile: ['', Validators.maxLength(140)],
     image: [''],
     tmp:[''], // temporary form control for file upload
   });
@@ -38,6 +38,7 @@ export class UserEditComponent implements OnInit {
   }
 
   get user_name() { return this.userForm.get('user_name') }
+  get profile() { return this.userForm.get('profile') }
 
   public updateUser(): void {
     const { user_name, profile, image } = this.userForm.value;

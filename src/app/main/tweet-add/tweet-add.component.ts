@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 // import { AuthService } from 'src/app/services/auth.service';
 import { TweetService } from 'src/app/services/tweet.service';
 
@@ -19,11 +20,14 @@ export class TweetAddComponent implements OnInit {
   constructor(
     private tweetService: TweetService,
     private fb: FormBuilder,
+    private dialogRef: MatDialogRef<TweetAddComponent>,
     // private auth: AuthService,
   ) { }
 
   ngOnInit(): void {
   }
+
+  get message() { return this.tweetForm.get('message') }
 
   public addTweet(): void {
     this.tweetService.addTweet(this.tweetForm.value).subscribe(tweet => {
@@ -37,6 +41,11 @@ export class TweetAddComponent implements OnInit {
       // }
       console.log(tweet);
     });
+    this.dialogRef.close();
+  }
+
+  public cancel(): void {
+    this.dialogRef.close();
   }
 
 }

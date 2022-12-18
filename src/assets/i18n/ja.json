@@ -23,7 +23,8 @@
   },
   "VALIDATOR": {
     "REQUIRED": "は必須項目です。",
-    "INVALID": "が不正です。"
+    "INVALID": "が不正です。",
+    "LESS_THAN": "は{{ val }}文字未満です。"
   },
   "SHARE": {
     "UPDATE": "更新",

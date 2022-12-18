@@ -11,7 +11,7 @@
     <mat-icon>home</mat-icon>
     {{ 'USER.HOME' | translate }}
   </a>
-  <a mat-list-item>
+  <a mat-list-item (click)="addTweet()">
     <mat-icon>add</mat-icon>
     {{ 'TWEET.ADD' | translate }}
   </a>

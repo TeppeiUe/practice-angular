@@ -3,7 +3,10 @@
     "ADD": "ツイート",
     "LIST": "ツイート一覧",
     "MESSAGE": "メッセージ",
-    "CREATED_AT": "作成日"
+    "CREATED_AT": "作成日",
+    "FAVORITE": {
+      "LIST": "お気に入り一覧"
+    }
   },
   "USER": {
     "ADD": "新規登録",
@@ -15,7 +18,13 @@
     "USER_NAME": "ユーザー名",
     "PROFILE": "プロフィール",
     "IMAGE": "プロフィール画像",
-    "CREATED_AT": "開始日"
+    "CREATED_AT": "開始日",
+    "FOLLOWING": {
+      "LIST": "フォロー一覧"
+    },
+    "FOLLOWER": {
+      "LIST": "フォロワー一覧"
+    }
   },
   "AUTH": {
     "LOGIN": "ログイン",

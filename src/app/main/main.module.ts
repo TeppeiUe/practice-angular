@@ -20,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 // npm i -s --legacy-peer-deps ngx-material-file-input
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -49,6 +50,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
+    MatCardModule,
     MaterialFileInputModule,
     FlexLayoutModule,
     TranslateModule

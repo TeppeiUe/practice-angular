@@ -20,6 +20,7 @@
     "IMAGE": "プロフィール画像",
     "CREATED_AT": "開始日",
     "FOLLOWING": {
+      "ADD": "フォロー",
       "LIST": "フォロー一覧"
     },
     "FOLLOWER": {
@@ -38,5 +39,8 @@
   "SHARE": {
     "UPDATE": "更新",
     "CANCEL": "キャンセル"
+  },
+  "FORMAT": {
+    "DATE": "yyyy/MM/dd hh:mm"
   }
 }

@@ -1,0 +1,33 @@
+$margin: 0.5%;
+
+mat-card {
+  width: calc(100% / 3 - 2 * $margin);
+  margin: $margin;
+}
+
+mat-card-header {
+  margin-bottom: 12px;
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
+mat-card-content {
+  height: 100px;
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1919px) {
+  mat-card { width: calc(100% / 3 - 2 * $margin); }
+}
+
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+  mat-card { width: calc(100% / 2 - 2 * $margin); }
+}
+
+@media screen and (min-width: 600px) and (max-width: 959px) {
+  mat-card { width: calc(100% - 2 * $margin) }
+}
+
+@media screen and (max-width: 599px) {
+  mat-card { width: calc(100% - 2 * $margin); }
+}

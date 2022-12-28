@@ -1,15 +1,15 @@
 {{ userInfo | json }}
 <mat-tab-group (selectedTabChange)="tabClick($event)">
   <mat-tab label="{{ 'TWEET.LIST' | translate }}">
-    {{ tweetList | json }}
+    <app-tweet-card [tweetList]="tweetList" [isHeader]="false"></app-tweet-card>
   </mat-tab>
   <mat-tab label="{{ 'USER.FOLLOWING.LIST' | translate }}">
-    {{ userList | json }}
+    <app-user-card [userList]="userList"></app-user-card>
   </mat-tab>
   <mat-tab label="{{ 'USER.FOLLOWER.LIST' | translate }}">
-    {{ userList | json }}
+    <app-user-card [userList]="userList"></app-user-card>
   </mat-tab>
   <mat-tab label="{{ 'TWEET.FAVORITE.LIST' | translate }}">
-    {{ tweetList | json }}
+    <app-tweet-card [tweetList]="tweetList"></app-tweet-card>
   </mat-tab>
 </mat-tab-group>

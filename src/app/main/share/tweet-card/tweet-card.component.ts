@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class TweetCardComponent implements OnInit {
   @Input() tweetList: Tweet[]|[] = [];
+  @Input() isHeader = true;
   private current_user_id = 0;
 
   constructor(

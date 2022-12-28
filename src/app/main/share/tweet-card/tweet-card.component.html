@@ -1,7 +1,7 @@
 <div fxLayout="row wrap">
   <ng-container *ngFor="let tweet of tweetList; index as ind">
     <mat-card>
-      <mat-card-header>
+      <mat-card-header *ngIf="isHeader">
         <img
           mat-card-avatar
           routerLink="/user/{{ tweet.user?.id }}"

@@ -26,6 +26,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
 import { UserCardComponent } from './share/user-card/user-card.component';
+import { TweetCardComponent } from './share/tweet-card/tweet-card.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { UserCardComponent } from './share/user-card/user-card.component';
     HomeComponent,
     UserEditComponent,
     TweetAddComponent,
-    UserCardComponent
+    UserCardComponent,
+    TweetCardComponent
   ],
   imports: [
     CommonModule,

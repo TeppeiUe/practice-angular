@@ -9,10 +9,16 @@ export interface UserList {
 }
 
 export interface User {
-  id?: number;
+  id: number;
   user_name: string;
   profile?: string;
   image?: string;
   created_at?: Date;
   tweets?: Tweet[] | [];
+}
+
+export interface UserPut {
+  user_name: string;
+  profile: string;
+  image: string;
 }

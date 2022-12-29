@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, UserInfo, UserList } from '../models/user-params';
+import { User, UserInfo, UserList, UserPut } from '../models/user-params';
 import { Observable, of, Subject, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -72,7 +72,7 @@ export class UserService {
   }
 
 
-  modifyUserInfo(user: User): Observable<boolean> {
+  modifyUserInfo(user: UserPut): Observable<boolean> {
     return this.http.put(
       environment.apiUrl + '/user',
       user, {

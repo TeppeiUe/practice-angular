@@ -1,4 +1,31 @@
-{{ userInfo | json }}
+<mat-card class="mat-elevation-z0">
+  <div id="mat-card-inner">
+    <mat-card-header>
+      <img
+        mat-card-avatar
+        src="{{ userInfo?.image ?? '' ?
+          userInfo!.image : './assets/img/baseline_person_black_24dp.png' }}">
+      <mat-card-title>
+        {{ userInfo?.user_name }}
+      </mat-card-title>
+      <span class="spacer"></span>
+      <button mat-stroked-button color="primary">
+        {{ 'USER.FOLLOWING.ADD' | translate }}
+      </button>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="space-between">
+      <span>
+        {{ 'USER.PROFILE' | translate }}
+      </span>
+      <textarea readonly>{{ userInfo?.profile }}</textarea>
+      <span>
+        {{ 'USER.CREATED_AT' | translate }}
+        {{ userInfo?.created_at | date: 'yyyy/MM/dd hh:mm' }}
+      </span>
+    </mat-card-content>
+  </div>
+</mat-card>
+
 <mat-tab-group (selectedTabChange)="tabClick($event)">
   <mat-tab label="{{ 'TWEET.LIST' | translate }}">
     <app-tweet-card [tweetList]="tweetList" [isHeader]="false"></app-tweet-card>

@@ -5,14 +5,32 @@
         <img
           mat-card-avatar
           routerLink="/user/{{ user.id }}"
-          src="{{ user.image ? user.image : './assets/img/baseline_person_black_24dp.png' }}">
+          src="{{ user.image ?
+            user.image : './assets/img/baseline_person_black_24dp.png' }}">
         <mat-card-title routerLink="/user/{{ user.id }}">
           {{ user.user_name }}
         </mat-card-title>
         <span class="spacer"></span>
-        <button mat-stroked-button color="primary">
-          {{ 'USER.FOLLOWING.ADD' | translate }}
-        </button>
+        <ng-container
+          *ngIf="setFollowing(user.id); then onFollowing; else offFollowing">
+        </ng-container>
+
+        <ng-template #onFollowing>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="deleteFollowing(user.id)">
+            {{ 'USER.FOLLOWING.NOW' | translate }}
+          </button>
+        </ng-template>
+        <ng-template #offFollowing>
+          <button
+            mat-stroked-button
+            color="primary"
+            (click)="addFollowing(user.id)">
+            {{ 'USER.FOLLOWING.ADD' | translate }}
+          </button>
+        </ng-template>
       </mat-card-header>
 
       <mat-card-content fxLayout="column" fxLayoutAlign="space-between">

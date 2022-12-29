@@ -22,6 +22,7 @@
     "CREATED_AT": "開始日",
     "FOLLOWING": {
       "ADD": "フォロー",
+      "NOW": "フォロー中",
       "LIST": "フォロー一覧"
     },
     "FOLLOWER": {

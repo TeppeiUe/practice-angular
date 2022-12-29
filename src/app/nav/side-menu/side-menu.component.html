@@ -11,6 +11,10 @@
     <mat-icon>home</mat-icon>
     {{ 'USER.HOME' | translate }}
   </a>
+  <a mat-list-item href="user/{{ current_user_id }}">
+    <mat-icon>account_circle</mat-icon>
+    {{ 'USER.MY_PAGE' | translate }}
+  </a>
   <a mat-list-item (click)="addTweet()">
     <mat-icon>add</mat-icon>
     {{ 'TWEET.ADD' | translate }}

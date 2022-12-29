@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./side-menu.component.scss']
 })
 export class SideMenuComponent implements OnInit {
+  public current_user_id = 0;
 
   constructor(
     public auth: AuthService, // to confirm update contents at html view
@@ -19,6 +20,9 @@ export class SideMenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(user => {
+      this.current_user_id = user?.id ?? 0;
+    })
   }
 
   public addTweet() {

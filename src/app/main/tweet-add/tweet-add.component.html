@@ -6,12 +6,10 @@
       fxLayout="column"
       [formGroup]="tweetForm">
       <mat-form-field>
-        <input
+        <textarea
           matInput
-          matType="textarea"
-          type="textarea"
           formControlName="message"
-          placeholder="{{ 'TWEET.MESSAGE' | translate }}">
+          placeholder="{{ 'TWEET.MESSAGE' | translate }}"></textarea>
           <mat-error
           *ngIf="message?.errors !== null
             && message?.errors?.['required'] === true">

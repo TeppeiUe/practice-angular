@@ -20,12 +20,10 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input
+      <textarea
         matInput
-        matType="textarea"
-        type="textarea"
         formControlName="profile"
-        placeholder="{{ 'USER.PROFILE' | translate }}">
+        placeholder="{{ 'USER.PROFILE' | translate }}"></textarea>
       <mat-error>
         {{ 'USER.PROFILE' | translate }}
         {{

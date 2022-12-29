@@ -16,8 +16,8 @@
       </mat-card-header>
 
       <mat-card-content fxLayout="column" fxLayoutAlign="space-between">
-        <p>{{ user.profile }}</p>
-        <p>{{ user.created_at| date: 'yyyy/MM/dd hh:mm' }}</p>
+        <textarea readonly>{{ user.profile }}</textarea>
+        <span>{{ user.created_at| date: 'yyyy/MM/dd hh:mm' }}</span>
       </mat-card-content>
     </mat-card>
   </ng-container>

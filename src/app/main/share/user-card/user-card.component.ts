@@ -14,13 +14,14 @@ export class UserCardComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private follow: FollowService,
+    private followService: FollowService,
   ) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe(user => {
       if (user) {
-        this.follow.getUserFollowingList(user.id).subscribe(followings => {
+        this.followService.getUserFollowingList(user.id)
+        .subscribe(followings => {
           this.followingList = followings.map(f => f.id);
         });
       }
@@ -31,12 +32,20 @@ export class UserCardComponent implements OnInit {
     return this.followingList.includes(user_id)
   }
 
-  public deleteFollowing(ind: number) {
-    this.followingList = this.followingList.filter(f => f !== ind);
+  public deleteFollowing(user_id: number) {
+    this.followService.deleteFollowing(user_id).subscribe(res => {
+      if (res) {
+        this.followingList = this.followingList.filter(f => f !== user_id);
+      }
+    })
   }
 
-  public addFollowing(ind: number) {
-    this.followingList.push(ind);
+  public addFollowing(user_id: number) {
+    this.followService.addFollowing(user_id).subscribe(res => {
+      if (res) {
+        this.followingList.push(user_id);
+      }
+    })
   }
 
 }

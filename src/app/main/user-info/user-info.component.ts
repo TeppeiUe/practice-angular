@@ -7,6 +7,7 @@ import { FollowService } from 'src/app/services/follow.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { Tweet } from 'src/app/models/tweet-params';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-info',
@@ -18,12 +19,14 @@ export class UserInfoComponent implements OnInit {
   public userList: User[] = [];
   public tweetList: Tweet[] = [];
   private user_id = 0;
+  protected is_following = false;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
     private followService: FollowService,
     private favoriteService: FavoriteService,
+    private auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +36,30 @@ export class UserInfoComponent implements OnInit {
       this.user_id = Number(params.get('id') ?? 0);
     });
 
-    if (this.user_id) this.getUserInfo();
+    if (this.user_id) {
+      this.getUserInfo();
+      this.followService.getUserFollowerList(this.user_id)
+      .subscribe(followers => {
+        this.auth.user$.subscribe(user => {
+          if (user) {
+            const followerIdList = followers.map(f => f.id);
+            this.is_following = followerIdList.includes(user.id);
+          }
+        });
+      });
+    }
+  }
+
+  public deleteFollowing() {
+    this.followService.deleteFollowing(this.user_id).subscribe(res => {
+      if (res) this.is_following = false;
+    });
+  }
+
+  public addFollowing() {
+    this.followService.addFollowing(this.user_id).subscribe(res => {
+      if (res) this.is_following = true;
+    });
   }
 
   public tabClick(event: MatTabChangeEvent) {

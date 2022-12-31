@@ -26,15 +26,6 @@ export class TweetCardComponent implements OnInit {
   }
 
   public openTweetInfo(ind: number, tweet: Tweet) {
-    if (!this.isHeader) {
-      this.auth.user$.subscribe(user => {
-        if (user) {
-          const { id, user_name, image = '', profile = '' } = user;
-          tweet.user = { id, user_name, image, profile };
-        }
-      });
-    }
-
     this.dialog.open(TweetInfoComponent, {
       width: '600px',
       data: tweet,

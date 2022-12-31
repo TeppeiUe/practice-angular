@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserEditComponent implements OnInit {
   public userForm: FormGroup = this.fb.group({
-    user_name: ['', Validators.required],
+    user_name: ['', Validators.maxLength(16)],
     profile: ['', Validators.maxLength(140)],
     image: [''],
     tmp:[''], // temporary form control for file upload

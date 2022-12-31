@@ -11,7 +11,7 @@ import { UserService } from '../services/user.service';
 })
 export class SignupComponent implements OnInit, OnDestroy {
   public userForm: FormGroup = this.fb.group({
-    user_name: ['', Validators.required],
+    user_name: ['', Validators.maxLength(16)],
     email: ['', Validators.email],
     password: ['', Validators.required],
   });

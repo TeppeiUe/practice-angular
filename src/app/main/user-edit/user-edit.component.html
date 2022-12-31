@@ -10,12 +10,24 @@
         matType="text"
         type="text"
         formControlName="user_name"
-        placeholder="{{ 'USER.USER_NAME' | translate }}">
+        placeholder="{{ 'USER.USER_NAME' | translate }}"
+        required>
       <mat-error
         *ngIf="user_name?.errors !== null
           && user_name?.errors?.['required'] === true">
         {{ 'USER.USER_NAME' | translate }}
         {{ 'VALIDATOR.REQUIRED' | translate }}
+      </mat-error>
+      <mat-error
+        *ngIf="user_name?.errors !== null
+          && user_name?.errors?.['maxlength'] !== undefined">
+        {{ 'TWEET.USER_NAME' | translate }}
+        {{
+          'VALIDATOR.LESS_THAN' |
+          translate: {
+            val: user_name?.errors?.['maxlength']?.['requiredLength']
+          }
+        }}
       </mat-error>
     </mat-form-field>
 

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Tweet } from 'src/app/models/tweet-params';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
+import { FavoriteService } from 'src/app/services/favorite.service';
 
 @Component({
   selector: 'app-tweet-info',
@@ -15,6 +16,7 @@ export class TweetInfoComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private favorite: FavoriteService,
     @Inject(MAT_DIALOG_DATA) private data: Tweet,
   ) { }
 
@@ -31,24 +33,28 @@ export class TweetInfoComponent implements OnInit {
 
   public deleteFavorite(e: MouseEvent) {
     e.stopPropagation();
-    this.tweetInfo!.favorites = this.tweetInfo!.favorites
-      ?.filter(user => user.id !== this.current_user_id)
+    this.favorite.deleteFavorite(this.tweetInfo.id).subscribe(res => {
+      this.tweetInfo!.favorites = this.tweetInfo!.favorites
+        ?.filter(user => user.id !== this.current_user_id)
+    });
   }
 
   public addFavorite(e: MouseEvent) {
     e.stopPropagation();
-    this.auth.user$.subscribe(user => {
-      if (user) {
-        const { id, user_name, profile, image } = user;
-        this.tweetInfo!.favorites = [
-          ...(this.tweetInfo?.favorites ?? []), {
-            id,
-            user_name,
-            profile,
-            image
-          }
-        ];
-      }
+    this.favorite.addFavorite(this.tweetInfo.id).subscribe(res => {
+      this.auth.user$.subscribe(user => {
+        if (user) {
+          const { id, user_name, profile, image } = user;
+          this.tweetInfo!.favorites = [
+            ...(this.tweetInfo?.favorites ?? []), {
+              id,
+              user_name,
+              profile,
+              image
+            }
+          ];
+        }
+      });
     });
   }
 

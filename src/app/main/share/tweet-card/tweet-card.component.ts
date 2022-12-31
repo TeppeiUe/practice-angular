@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Tweet } from 'src/app/models/tweet-params';
 import { AuthService } from 'src/app/services/auth.service';
+import { FavoriteService } from 'src/app/services/favorite.service';
 import { TweetInfoComponent } from '../../tweet-info/tweet-info.component';
 
 @Component({
@@ -17,6 +18,7 @@ export class TweetCardComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private dialog: MatDialog,
+    private favorite: FavoriteService,
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +34,7 @@ export class TweetCardComponent implements OnInit {
     })
   }
 
-  public setFavorite(tweet: Tweet):boolean {
+  public setFavorite(tweet: Tweet): boolean {
     return !!(tweet.favorites?.filter(favorite =>
       favorite.id === this.current_user_id).length ?? 0)
   }
@@ -40,24 +42,31 @@ export class TweetCardComponent implements OnInit {
   public deleteFavorite(e: MouseEvent, ind: number) {
     e.stopPropagation();
     const target = this.tweetList[ind];
-    target.favorites = target.favorites?.filter(user => user.id !== this.current_user_id)
+    this.favorite.deleteFavorite(target.id).subscribe(res => {
+      if (res) {
+        target.favorites = target.favorites
+          ?.filter(user => user.id !== this.current_user_id);
+      }
+    });
   }
 
   public addFavorite(e: MouseEvent, ind: number) {
     e.stopPropagation();
-    this.auth.user$.subscribe(user => {
-      if (user) {
-        const target = this.tweetList[ind];
-        const { id, user_name, profile, image } = user;
-        target.favorites = [
-          ...(target.favorites ?? []), {
-            id,
-            user_name,
-            profile,
-            image
-          }
-        ];
-      }
+    const target = this.tweetList[ind];
+    this.favorite.addFavorite(target.id).subscribe(res => {
+      this.auth.user$.subscribe(user => {
+        if (user) {
+          const { id, user_name, profile, image } = user;
+          target.favorites = [
+            ...(target.favorites ?? []), {
+              id,
+              user_name,
+              profile,
+              image
+            }
+          ];
+        }
+      });
     });
   }
 

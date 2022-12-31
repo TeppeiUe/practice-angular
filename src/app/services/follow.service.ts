@@ -13,8 +13,8 @@ export class FollowService {
     private http: HttpClient,
   ) { }
 
-  public getUserFollowingList(user_id: number): Observable<User[]|[]> {
-    const subject = new Subject<User[]|[]>();
+  public getUserFollowingList(user_id: number): Observable<User[]> {
+    const subject = new Subject<User[]>();
     const subscription = this.http.get<UserList>(
       environment.apiUrl + `/user/${user_id}/followings`, {
         observe: 'response'
@@ -30,8 +30,8 @@ export class FollowService {
     return subject.asObservable()
   }
 
-  public getUserFollowerList(user_id: number): Observable<User[]|[]> {
-    const subject = new Subject<User[]|[]>();
+  public getUserFollowerList(user_id: number): Observable<User[]> {
+    const subject = new Subject<User[]>();
     const subscription = this.http.get<UserList>(
       environment.apiUrl + `/user/${user_id}/followers`, {
         observe: 'response'

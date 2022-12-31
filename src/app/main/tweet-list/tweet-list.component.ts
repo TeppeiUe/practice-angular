@@ -8,7 +8,7 @@ import { TweetService } from 'src/app/services/tweet.service';
   styleUrls: ['./tweet-list.component.scss']
 })
 export class TweetListComponent implements OnInit {
-  public tweetList: Tweet[]|[] = [];
+  public tweetList: Tweet[] = [];
 
   constructor(
     private tweetService: TweetService,

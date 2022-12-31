@@ -13,8 +13,8 @@ export class FavoriteService {
     private http: HttpClient,
   ) { }
 
-  public getUserFavoriteList(user_id: number): Observable<Tweet[]|[]> {
-    const subject = new Subject<Tweet[]|[]>();
+  public getUserFavoriteList(user_id: number): Observable<Tweet[]> {
+    const subject = new Subject<Tweet[]>();
     const subscription = this.http.get<TweetList>(
       environment.apiUrl + `/user/${user_id}/favorites`, {
         observe: 'response'

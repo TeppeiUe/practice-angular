@@ -9,7 +9,7 @@ import { FollowService } from 'src/app/services/follow.service';
   styleUrls: ['./user-card.component.scss']
 })
 export class UserCardComponent implements OnInit {
-  @Input() userList: User[]|[] = [];
+  @Input() userList: User[] = [];
   private followingList: number[] = [];
 
   constructor(

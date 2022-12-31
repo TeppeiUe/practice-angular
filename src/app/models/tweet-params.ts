@@ -1,7 +1,7 @@
 import { User } from "./user-params";
 
 export interface TweetList {
-  tweets: Tweet[] | [];
+  tweets: Tweet[] ;
 }
 
 export interface TweetInfo {
@@ -16,5 +16,5 @@ export interface Tweet {
   user_id: number;
   created_at: Date;
   user?: User;
-  favorites?: User[] | [];
+  favorites?: User[] ;
 }

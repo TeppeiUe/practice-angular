@@ -5,7 +5,7 @@ export interface UserInfo {
 }
 
 export interface UserList {
-  users: User[] | [];
+  users: User[] ;
 }
 
 export interface User {
@@ -14,7 +14,7 @@ export interface User {
   profile?: string;
   image?: string;
   created_at?: Date;
-  tweets?: Tweet[] | [];
+  tweets?: Tweet[] ;
 }
 
 export interface UserPut {

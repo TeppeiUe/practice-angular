@@ -10,7 +10,7 @@ import { TweetInfoComponent } from '../../tweet-info/tweet-info.component';
   styleUrls: ['./tweet-card.component.scss']
 })
 export class TweetCardComponent implements OnInit {
-  @Input() tweetList: Tweet[]|[] = [];
+  @Input() tweetList: Tweet[] = [];
   @Input() isHeader = true;
   private current_user_id = 0;
 

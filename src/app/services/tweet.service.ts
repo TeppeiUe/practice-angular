@@ -47,8 +47,8 @@ export class TweetService {
   }
 
 
-  public getTweetList(): Observable<Tweet[]|[]> {
-    const subject = new Subject<Tweet[]|[]>();
+  public getTweetList(): Observable<Tweet[]> {
+    const subject = new Subject<Tweet[]>();
     const subscription = this.http.get<TweetList>(
       environment.apiUrl + '/tweets', {
         observe: 'response',

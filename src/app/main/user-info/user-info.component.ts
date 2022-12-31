@@ -15,8 +15,8 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 })
 export class UserInfoComponent implements OnInit {
   public userInfo: User|null = null;
-  public userList: User[]|[] = [];
-  public tweetList: Tweet[]|[] = [];
+  public userList: User[] = [];
+  public tweetList: Tweet[] = [];
   private user_id = 0;
 
   constructor(

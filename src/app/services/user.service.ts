@@ -54,8 +54,8 @@ export class UserService {
   }
 
 
-  public getUserList(): Observable<User[]|[]> {
-    const subject = new Subject<User[]|[]>();
+  public getUserList(): Observable<User[]> {
+    const subject = new Subject<User[]>();
     const subscription = this.http.get<UserList>(
       environment.apiUrl + '/users', {
         observe: 'response',

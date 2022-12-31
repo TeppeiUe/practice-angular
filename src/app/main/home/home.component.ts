@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public tweetList: Tweet[]|[] = [];
+  public tweetList: Tweet[] = [];
 
   constructor(
     private auth: AuthService,

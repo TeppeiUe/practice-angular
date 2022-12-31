@@ -57,7 +57,20 @@ export class UserInfoComponent implements OnInit {
   private getUserInfo(): void {
     this.userService.getUserInfo(this.user_id)
     .subscribe(user => {
-      if (user) this.tweetList = user.tweets ?? [];
+      if (user && user.tweets !== undefined) {
+        const { id, user_name, profile, image } = user;
+        this.tweetList = user.tweets?.map(tweet => {
+          return {
+            ...tweet,
+            user: {
+              id,
+              user_name,
+              profile,
+              image,
+            }
+          }
+        })
+      }
       delete user?.tweets;
       this.userInfo = user;
     })

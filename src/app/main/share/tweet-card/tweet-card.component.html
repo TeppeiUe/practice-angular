@@ -1,6 +1,6 @@
 <div fxLayout="row wrap">
   <ng-container *ngFor="let tweet of tweetList; index as ind">
-    <mat-card>
+    <mat-card (click)="openTweetInfo(ind, tweet)">
       <mat-card-header *ngIf="isHeader">
         <img
           mat-card-avatar
@@ -11,10 +11,6 @@
         <mat-card-title routerLink="/user/{{ tweet.user?.id }}">
           {{ tweet.user?.user_name }}
         </mat-card-title>
-        <span class="spacer"></span>
-        <button mat-stroked-button color="primary">
-          {{ 'USER.FOLLOWING.ADD' | translate }}
-        </button>
       </mat-card-header>
 
       <mat-card-content>
@@ -33,12 +29,12 @@
         </span>
 
         <ng-template #onFavorite>
-          <button mat-icon-button color="warn" (click)="deleteFavorite(ind)">
+          <button mat-icon-button color="warn" (click)="deleteFavorite($event, ind)">
             <mat-icon>favorite</mat-icon>
           </button>
         </ng-template>
         <ng-template #offFavorite>
-          <button mat-icon-button (click)="addFavorite(ind)">
+          <button mat-icon-button (click)="addFavorite($event, ind)">
             <mat-icon>favorite_border</mat-icon>
           </button>
         </ng-template>

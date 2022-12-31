@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   public tweetList: Tweet[]|[] = [];
 
   constructor(
-    public auth: AuthService,
+    private auth: AuthService,
   ) { }
 
   ngOnInit(): void {

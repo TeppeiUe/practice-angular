@@ -1,35 +1,33 @@
 <h2 mat-dialog-title>{{ 'TWEET.ADD' | translate }}</h2>
 
 <mat-dialog-content>
-  <mat-dialog-content>
-    <form
-      fxLayout="column"
-      [formGroup]="tweetForm">
-      <mat-form-field>
-        <textarea
-          matInput
-          formControlName="message"
-          placeholder="{{ 'TWEET.MESSAGE' | translate }}"></textarea>
-          <mat-error
-          *ngIf="message?.errors !== null
-            && message?.errors?.['required'] === true">
-          {{ 'TWEET.MESSAGE' | translate }}
-          {{ 'VALIDATOR.REQUIRED' | translate }}
-        </mat-error>
+  <form
+    fxLayout="column"
+    [formGroup]="tweetForm">
+    <mat-form-field>
+      <textarea
+        matInput
+        formControlName="message"
+        placeholder="{{ 'TWEET.MESSAGE' | translate }}"></textarea>
         <mat-error
-          *ngIf="message?.errors !== null
-            && message?.errors?.['maxlength'] !== undefined">
-          {{ 'TWEET.MESSAGE' | translate }}
-          {{
-            'VALIDATOR.LESS_THAN' |
-            translate: {
-              val: message?.errors?.['maxlength']?.['requiredLength']
-            }
-          }}
-        </mat-error>
-      </mat-form-field>
-    </form>
-  </mat-dialog-content>
+        *ngIf="message?.errors !== null
+          && message?.errors?.['required'] === true">
+        {{ 'TWEET.MESSAGE' | translate }}
+        {{ 'VALIDATOR.REQUIRED' | translate }}
+      </mat-error>
+      <mat-error
+        *ngIf="message?.errors !== null
+          && message?.errors?.['maxlength'] !== undefined">
+        {{ 'TWEET.MESSAGE' | translate }}
+        {{
+          'VALIDATOR.LESS_THAN' |
+          translate: {
+            val: message?.errors?.['maxlength']?.['requiredLength']
+          }
+        }}
+      </mat-error>
+    </mat-form-field>
+  </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>

@@ -27,7 +27,7 @@ export class UserCardComponent implements OnInit {
     })
   }
 
-  public setFollowing(user_id: number):boolean {
+  public setFollowing(user_id: number): boolean {
     return this.followingList.includes(user_id)
   }
 

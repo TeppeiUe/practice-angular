@@ -1,0 +1,21 @@
+<div fxLayout="row wrap">
+  <ng-container *ngFor="let user of userList">
+    <mat-card class="mat-elevation-z0">
+      <mat-card-header>
+        <img
+          mat-card-avatar
+          routerLink="/user/{{ user.id }}"
+          [mat-dialog-close]
+          src="{{ user.image ?
+            user.image : './assets/img/baseline_person_black_24dp.png' }}">
+        <mat-card-title
+          routerLink="/user/{{ user.id }}"
+          [mat-dialog-close]>
+          {{ user.user_name }}
+        </mat-card-title>
+        <span class="spacer"></span>
+        <textarea readonly>{{ user.profile }}</textarea>
+      </mat-card-header>
+    </mat-card>
+  </ng-container>
+</div>

@@ -1,1 +1,65 @@
-{{ tweetInfo | json }}
+<mat-dialog-content>
+  <mat-card class="mat-elevation-z0">
+    <mat-card-header>
+      <img
+        mat-card-avatar
+        routerLink="/user/{{ tweetInfo.user?.id }}"
+        [mat-dialog-close]
+        src="{{ tweetInfo.user?.image ?? '' ?
+          tweetInfo.user?.image :
+          './assets/img/baseline_person_black_24dp.png' }}">
+      <mat-card-title
+        routerLink="/user/{{ tweetInfo.user?.id }}"
+        [mat-dialog-close]>
+        {{ tweetInfo.user?.user_name }}
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <textarea readonly>{{ tweetInfo.message }}</textarea>
+      <hr>
+      <mat-accordion>
+        <mat-expansion-panel
+          class="mat-elevation-z0"
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title >
+              <span>
+                <ng-container
+                  *ngIf="setFavorite(tweetInfo);
+                    then onFavorite; else offFavorite">
+                </ng-container>
+                {{ tweetInfo.favorites?.length ?? 0 }}
+              </span>
+              <span class="created_at" fxLayoutAlign="center center">
+                {{ tweetInfo.created_at | date: 'yyyy/MM/dd hh:mm' }}
+              </span>
+
+              <ng-template #onFavorite>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  (click)="deleteFavorite($event)">
+                  <mat-icon>favorite</mat-icon>
+                </button>
+              </ng-template>
+
+              <ng-template #offFavorite>
+                <button
+                  mat-icon-button
+                  (click)="addFavorite($event)">
+                  <mat-icon>favorite_border</mat-icon>
+                </button>
+              </ng-template>
+
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-favorite-card
+            *ngIf="panelOpenState"
+            [userList]="tweetInfo.favorites ?? []"></app-favorite-card>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>

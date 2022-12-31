@@ -21,12 +21,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
 // npm i -s --legacy-peer-deps ngx-material-file-input
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
 import { UserCardComponent } from './share/user-card/user-card.component';
 import { TweetCardComponent } from './share/tweet-card/tweet-card.component';
+import { FavoriteCardComponent } from './tweet-info/favorite-card/favorite-card.component';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { TweetCardComponent } from './share/tweet-card/tweet-card.component';
     UserEditComponent,
     TweetAddComponent,
     UserCardComponent,
-    TweetCardComponent
+    TweetCardComponent,
+    FavoriteCardComponent
   ],
   imports: [
     CommonModule,
@@ -55,6 +58,7 @@ import { TweetCardComponent } from './share/tweet-card/tweet-card.component';
     MatIconModule,
     MatTabsModule,
     MatCardModule,
+    MatExpansionModule,
     MaterialFileInputModule,
     FlexLayoutModule,
     TranslateModule

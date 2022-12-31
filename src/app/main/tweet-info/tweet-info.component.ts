@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Tweet } from 'src/app/models/tweet-params';
-import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs';
-import { TweetService } from 'src/app/services/tweet.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-tweet-info',
@@ -10,21 +9,45 @@ import { TweetService } from 'src/app/services/tweet.service';
   styleUrls: ['./tweet-info.component.scss']
 })
 export class TweetInfoComponent implements OnInit {
-  public tweetInfo: Tweet|null = null;
+  public tweetInfo: Tweet = this.data;
+  private current_user_id = 0;
+  protected panelOpenState = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private tweetService: TweetService,
+    private auth: AuthService,
+    @Inject(MAT_DIALOG_DATA) private data: Tweet,
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(
-      take(1)
-    ).subscribe(params => {
-      const tweet_id = params.get('id');
-      if (tweet_id !== undefined) {
-        this.tweetService.getTweetInfo(Number(tweet_id))
-        .subscribe(tweet => this.tweetInfo = tweet)
+    this.auth.user$.subscribe(user => {
+      this.current_user_id = user?.id ?? 0;
+    });
+  }
+
+  public setFavorite(tweet: Tweet):boolean {
+    return !!(tweet.favorites?.filter(favorite =>
+      favorite.id === this.current_user_id).length ?? 0)
+  }
+
+  public deleteFavorite(e: MouseEvent) {
+    e.stopPropagation();
+    this.tweetInfo!.favorites = this.tweetInfo!.favorites
+      ?.filter(user => user.id !== this.current_user_id)
+  }
+
+  public addFavorite(e: MouseEvent) {
+    e.stopPropagation();
+    this.auth.user$.subscribe(user => {
+      if (user) {
+        const { id, user_name, profile, image } = user;
+        this.tweetInfo!.favorites = [
+          ...(this.tweetInfo?.favorites ?? []), {
+            id,
+            user_name,
+            profile,
+            image
+          }
+        ];
       }
     });
   }

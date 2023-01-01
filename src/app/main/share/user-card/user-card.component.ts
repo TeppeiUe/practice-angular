@@ -16,7 +16,7 @@ enum buttonType {
 })
 export class UserCardComponent implements OnInit {
   @Input() userList: User[] = [];
-  private followingList: number[] = [];
+  private followingList: number[] = []; // following user_id list
   private current_user_id = 0;
 
   constructor(
@@ -36,6 +36,11 @@ export class UserCardComponent implements OnInit {
     })
   }
 
+  /**
+   * set button type
+   * @param user_id
+   * @returns button type
+   */
   public setButtonType(user_id: number): buttonType {
     if (this.current_user_id === user_id) {
       return buttonType.none
@@ -45,6 +50,10 @@ export class UserCardComponent implements OnInit {
     }
   }
 
+  /**
+   * remove following
+   * @param user_id
+   */
   public deleteFollowing(user_id: number) {
     this.followService.deleteFollowing(user_id).subscribe(res => {
       if (res) {
@@ -53,6 +62,10 @@ export class UserCardComponent implements OnInit {
     })
   }
 
+  /**
+   * register following
+   * @param user_id
+   */
   public addFollowing(user_id: number) {
     this.followService.addFollowing(user_id).subscribe(res => {
       if (res) {

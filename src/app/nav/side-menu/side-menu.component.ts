@@ -24,6 +24,9 @@ export class SideMenuComponent implements OnInit {
     })
   }
 
+  /**
+   * open tweet-add dialog
+   */
   public addTweet() {
     this.dialog.open(TweetAddComponent, {
       width: '600px',
@@ -32,6 +35,9 @@ export class SideMenuComponent implements OnInit {
     });
   }
 
+  /**
+   * logout method
+   */
   public logout(): void {
     this.auth.logout().subscribe(isLogout => {
       if (isLogout) this.router.navigate(['login'])

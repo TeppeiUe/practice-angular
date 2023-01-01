@@ -29,6 +29,9 @@ export class TweetAddComponent implements OnInit {
 
   get message() { return this.tweetForm.get('message') }
 
+  /**
+   * create new tweet
+   */
   public addTweet(): void {
     this.tweetService.addTweet(this.tweetForm.value).subscribe(tweet => {
       // ajax likeな運用を予定
@@ -44,6 +47,9 @@ export class TweetAddComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  /**
+   * cancel method
+   */
   public cancel(): void {
     this.dialogRef.close();
   }

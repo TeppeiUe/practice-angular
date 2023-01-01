@@ -26,11 +26,20 @@ export class TweetInfoComponent implements OnInit {
     });
   }
 
+  /**
+   * tweet favorite ?
+   * @param tweet
+   * @returns {boolean}
+   */
   public setFavorite(tweet: Tweet):boolean {
     return !!(tweet.favorites?.filter(favorite =>
       favorite.id === this.current_user_id).length ?? 0)
   }
 
+  /**
+   * remove tweet favorite
+   * @param e to prevent other click event
+   */
   public deleteFavorite(e: MouseEvent) {
     e.stopPropagation();
     this.favorite.deleteFavorite(this.tweetInfo.id).subscribe(res => {
@@ -39,6 +48,10 @@ export class TweetInfoComponent implements OnInit {
     });
   }
 
+  /**
+   * register tweet favorite
+   * @param e to prevent other click event
+   */
   public addFavorite(e: MouseEvent) {
     e.stopPropagation();
     this.favorite.addFavorite(this.tweetInfo.id).subscribe(res => {

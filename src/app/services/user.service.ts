@@ -13,6 +13,10 @@ export class UserService {
     private http: HttpClient,
   ) { }
 
+  /**
+   * http communication for creating new user
+   * @param user
+   */
   public addUser(user: User): Observable<User|null> {
     const subject = new Subject<User|null>();
     const subscription = this.http.post<UserInfo>(
@@ -35,7 +39,10 @@ export class UserService {
     return subject.asObservable()
   }
 
-
+  /**
+   * http communication for getting user information
+   * @param user_id
+   */
   public getUserInfo(user_id: number): Observable<User|null> {
     const subject = new Subject<User|null>();
     const subscription = this.http.get<UserInfo>(
@@ -53,7 +60,9 @@ export class UserService {
     return subject.asObservable()
   }
 
-
+  /**
+   * http communication for getting user list
+   */
   public getUserList(): Observable<User[]> {
     const subject = new Subject<User[]>();
     const subscription = this.http.get<UserList>(
@@ -71,8 +80,11 @@ export class UserService {
     return subject.asObservable()
   }
 
-
-  modifyUserInfo(user: UserPut): Observable<boolean> {
+  /**
+   * http communication for updating user information
+   * @param user
+   */
+  public modifyUserInfo(user: UserPut): Observable<boolean> {
     return this.http.put(
       environment.apiUrl + '/user',
       user, {

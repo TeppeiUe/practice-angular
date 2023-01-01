@@ -13,6 +13,10 @@ export class TweetService {
     private http: HttpClient,
   ) { }
 
+  /**
+   * http communication for creating new tweet
+   * @param tweet tweet message
+   */
   public addTweet(tweet: Tweet) {
     return this.http.post<TweetInfo>(
       environment.apiUrl + '/tweet',
@@ -29,6 +33,10 @@ export class TweetService {
   }
 
 
+  /**
+   * http communication for getting tweet detail
+   * @param tweet_id
+   */
   public getTweetInfo(tweet_id: number): Observable<Tweet|null> {
     const subject = new Subject<Tweet|null>();
     const subscription = this.http.get<TweetInfo>(
@@ -46,7 +54,9 @@ export class TweetService {
     return subject.asObservable()
   }
 
-
+  /**
+   * http communication for getting tweet list
+   */
   public getTweetList(): Observable<Tweet[]> {
     const subject = new Subject<Tweet[]>();
     const subscription = this.http.get<TweetList>(

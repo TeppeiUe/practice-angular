@@ -65,18 +65,27 @@ export class UserInfoComponent implements OnInit {
     }
   }
 
+  /**
+   * remove following
+   */
   public deleteFollowing() {
     this.followService.deleteFollowing(this.user_id).subscribe(res => {
       if (res) this.btnType = buttonType.offFollowing;
     });
   }
 
+  /**
+   * register following
+   */
   public addFollowing() {
     this.followService.addFollowing(this.user_id).subscribe(res => {
       if (res) this.btnType = buttonType.onFollowing;
     });
   }
 
+  /**
+   * open user-edit dialog
+   */
   public updateUser() {
     this.dialog.open(UserEditComponent, {
       width: '600px',
@@ -85,6 +94,10 @@ export class UserInfoComponent implements OnInit {
     });
   }
 
+  /**
+   * When tab change event occurs, set new data
+   * @param event
+   */
   public tabClick(event: MatTabChangeEvent) {
     const tabIndex = event.index;
     switch (tabIndex) {
@@ -103,6 +116,9 @@ export class UserInfoComponent implements OnInit {
     }
   }
 
+  /**
+   * set base user information
+   */
   private getUserInfo(): void {
     this.userService.getUserInfo(this.user_id)
     .subscribe(user => {
@@ -125,16 +141,25 @@ export class UserInfoComponent implements OnInit {
     })
   }
 
+  /**
+   * set following user list
+   */
   private getFollowingList() {
     this.followService.getUserFollowingList(this.user_id)
     .subscribe(users => this.userList = users);
   }
 
+  /**
+   * set follower user list
+   */
   private getFollowerList(): void {
     this.followService.getUserFollowerList(this.user_id)
     .subscribe(users => this.userList = users);
   }
 
+  /**
+   * favorite tweet list
+   */
   private getFavoriteList(): void {
     this.favoriteService.getUserFavoriteList(this.user_id)
     .subscribe(tweets => this.tweetList = tweets)

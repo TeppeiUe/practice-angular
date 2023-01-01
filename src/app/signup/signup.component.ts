@@ -30,6 +30,9 @@ export class SignupComponent implements OnInit, OnDestroy {
   get email() { return this.userForm.get('email') }
   get password() { return this.userForm.get('password') }
 
+  /**
+   * create new user
+   */
   public addUser(): void {
     this.subscriptions.add(
       this.userService.addUser(this.userForm.value).subscribe(user => {

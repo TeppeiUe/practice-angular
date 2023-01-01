@@ -13,6 +13,10 @@ export class FollowService {
     private http: HttpClient,
   ) { }
 
+  /**
+   * http communication for registering following
+   * @param user_id
+   */
   public addFollowing(user_id: number): Observable<boolean> {
     return this.http.post(
       environment.apiUrl + `/user/${user_id}/following`,
@@ -28,6 +32,10 @@ export class FollowService {
     )
   }
 
+  /**
+   * http communication for removing following
+   * @param user_id
+   */
   public deleteFollowing(user_id: number): Observable<boolean> {
     return this.http.delete(
       environment.apiUrl + `/user/${user_id}/following`, {
@@ -39,6 +47,10 @@ export class FollowService {
     )
   }
 
+  /**
+   * http communication for getting following user list
+   * @param user_id
+   */
   public getUserFollowingList(user_id: number): Observable<User[]> {
     const subject = new Subject<User[]>();
     const subscription = this.http.get<UserList>(
@@ -56,6 +68,10 @@ export class FollowService {
     return subject.asObservable()
   }
 
+  /**
+   * http communication for getting follower user list
+   * @param user_id
+   */
   public getUserFollowerList(user_id: number): Observable<User[]> {
     const subject = new Subject<User[]>();
     const subscription = this.http.get<UserList>(

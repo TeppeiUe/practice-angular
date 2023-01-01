@@ -13,12 +13,7 @@ import {
   tap
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User, UserInfo } from '../models/user-params';
-
-interface UserAuth {
-  email: string;
-  password: string;
-}
+import { User, UserInfo, UserAuth } from '../models/user-params';
 
 @Injectable({
   providedIn: 'root'
@@ -34,10 +29,18 @@ export class AuthService {
     return this._user$.asObservable().pipe(take(1))
   }
 
+  /**
+   * pass new values to observer
+   * @param user
+   */
   setUser(user: User|null) {
     this._user$.next(user)
   }
 
+  /**
+   * http communication for login
+   * @param userAuth
+   */
   login(userAuth: UserAuth) {
     const subject = new Subject<User|null>();
     const subscription = this.http.post<UserInfo>(
@@ -65,6 +68,9 @@ export class AuthService {
   }
 
 
+  /**
+   * http communication for logout
+   */
   logout(): Observable<boolean> {
     return this.http.delete(
       environment.apiUrl + '/logout', {
@@ -76,7 +82,9 @@ export class AuthService {
     )
   }
 
-
+  /**
+   * login check
+   */
   authCheck(): Observable<boolean> {
     return this.user$.pipe(
       distinct(),

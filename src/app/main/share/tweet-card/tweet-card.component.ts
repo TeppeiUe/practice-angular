@@ -27,18 +27,32 @@ export class TweetCardComponent implements OnInit {
     });
   }
 
-  public openTweetInfo(ind: number, tweet: Tweet) {
+  /**
+   * open tweet-info dialog
+   * @param tweet
+   */
+  public openTweetInfo(tweet: Tweet) {
     this.dialog.open(TweetInfoComponent, {
       width: '600px',
       data: tweet,
     })
   }
 
+  /**
+   * tweet favorite ?
+   * @param tweet
+   * @returns {boolean}
+   */
   public setFavorite(tweet: Tweet): boolean {
     return !!(tweet.favorites?.filter(favorite =>
       favorite.id === this.current_user_id).length ?? 0)
   }
 
+  /**
+   * remove tweet favorite
+   * @param e to prevent other click event
+   * @param ind tweetList index
+   */
   public deleteFavorite(e: MouseEvent, ind: number) {
     e.stopPropagation();
     const target = this.tweetList[ind];
@@ -50,6 +64,11 @@ export class TweetCardComponent implements OnInit {
     });
   }
 
+  /**
+   * register tweet favorite
+   * @param e to prevent other click event
+   * @param ind tweetList index
+   */
   public addFavorite(e: MouseEvent, ind: number) {
     e.stopPropagation();
     const target = this.tweetList[ind];

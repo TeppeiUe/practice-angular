@@ -29,6 +29,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   get email() { return this.userForm.get('email') }
   get password() { return this.userForm.get('password') }
 
+  /**
+   * login method
+   */
   public login(): void {
     this.subscriptions.add(
       this.authService.login(this.userForm.value).subscribe(user => {

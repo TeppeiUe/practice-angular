@@ -13,6 +13,10 @@ export class FavoriteService {
     private http: HttpClient,
   ) { }
 
+  /**
+   * http communication for register tweet favorite
+   * @param tweet_id
+   */
   public addFavorite(tweet_id: number): Observable<boolean> {
     return this.http.post(
       environment.apiUrl + `/tweet/${tweet_id}/favorite`,
@@ -28,6 +32,10 @@ export class FavoriteService {
     )
   }
 
+  /**
+   * http communication for remove tweet favorite
+   * @param tweet_id
+   */
   public deleteFavorite(tweet_id: number): Observable<boolean> {
     return this.http.delete(
       environment.apiUrl + `/tweet/${tweet_id}/favorite`, {
@@ -39,6 +47,10 @@ export class FavoriteService {
     )
   }
 
+  /**
+   * http communication for favorite tweet list
+   * @param user_id
+   */
   public getUserFavoriteList(user_id: number): Observable<Tweet[]> {
     const subject = new Subject<Tweet[]>();
     const subscription = this.http.get<TweetList>(

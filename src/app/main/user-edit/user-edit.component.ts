@@ -24,12 +24,13 @@ export class UserEditComponent implements OnInit {
     private dialogRef: MatDialogRef<UserEditComponent>,
   ) {
     this.auth.user$.subscribe(user => {
-      console.log(user);
-      this.userForm.patchValue({
-        user_name: user?.user_name ?? '',
-        profile: user?.profile ?? '',
-        image: user?.image ?? '',
-      });
+      if (user) {
+        this.userForm.patchValue({
+          user_name: user.user_name ?? '',
+          profile: user.profile ?? '',
+          image: user.image ?? '',
+        });
+      }
     });
 
   }
@@ -40,6 +41,9 @@ export class UserEditComponent implements OnInit {
   get user_name() { return this.userForm.get('user_name') }
   get profile() { return this.userForm.get('profile') }
 
+  /**
+   * modify user information
+   */
   public updateUser(): void {
     const { user_name, profile, image } = this.userForm.value;
     this.userService.modifyUserInfo({
@@ -60,10 +64,17 @@ export class UserEditComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  /**
+   * cancel method
+   */
   public cancel(): void {
     this.dialogRef.close();
   }
 
+  /**
+   * When file change event occurs, set base64-type image
+   * @param event
+   */
   public onFileChange(event: Readonly<Event>) {
     const target = event.target as HTMLInputElement;
     const file = (target.files as FileList)[0];

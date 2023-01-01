@@ -8,6 +8,15 @@ import { FavoriteService } from 'src/app/services/favorite.service';
 import { Tweet } from 'src/app/models/tweet-params';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { UserEditComponent } from '../user-edit/user-edit.component';
+
+enum buttonType {
+  none,
+  edit,
+  onFollowing,
+  offFollowing,
+}
 
 @Component({
   selector: 'app-user-info',
@@ -19,7 +28,7 @@ export class UserInfoComponent implements OnInit {
   public userList: User[] = [];
   public tweetList: Tweet[] = [];
   private user_id = 0;
-  protected is_following = false;
+  protected btnType: buttonType = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +36,7 @@ export class UserInfoComponent implements OnInit {
     private followService: FollowService,
     private favoriteService: FavoriteService,
     private auth: AuthService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -38,27 +48,40 @@ export class UserInfoComponent implements OnInit {
 
     if (this.user_id) {
       this.getUserInfo();
-      this.followService.getUserFollowerList(this.user_id)
-      .subscribe(followers => {
-        this.auth.user$.subscribe(user => {
-          if (user) {
-            const followerIdList = followers.map(f => f.id);
-            this.is_following = followerIdList.includes(user.id);
+      this.auth.user$.subscribe(user => {
+        if (user) {
+          if (user.id === this.user_id) {
+            this.btnType = buttonType.edit;
+          } else {
+            this.followService.getUserFollowerList(this.user_id)
+            .subscribe(followers => {
+              const followerIdList = followers.map(f => f.id);
+              this.btnType = followerIdList.includes(user.id) ?
+                buttonType.onFollowing : buttonType.offFollowing;
+            });
           }
-        });
+        }
       });
     }
   }
 
   public deleteFollowing() {
     this.followService.deleteFollowing(this.user_id).subscribe(res => {
-      if (res) this.is_following = false;
+      if (res) this.btnType = buttonType.offFollowing;
     });
   }
 
   public addFollowing() {
     this.followService.addFollowing(this.user_id).subscribe(res => {
-      if (res) this.is_following = true;
+      if (res) this.btnType = buttonType.onFollowing;
+    });
+  }
+
+  public updateUser() {
+    this.dialog.open(UserEditComponent, {
+      width: '600px',
+      disableClose: true,
+      autoFocus: true,
     });
   }
 

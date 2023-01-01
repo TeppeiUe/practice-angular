@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TweetAddComponent } from 'src/app/main/tweet-add/tweet-add.component';
-import { UserEditComponent } from 'src/app/main/user-edit/user-edit.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -27,14 +26,6 @@ export class SideMenuComponent implements OnInit {
 
   public addTweet() {
     this.dialog.open(TweetAddComponent, {
-      width: '600px',
-      disableClose: true,
-      autoFocus: true,
-    });
-  }
-
-  public updateUser() {
-    this.dialog.open(UserEditComponent, {
       width: '600px',
       disableClose: true,
       autoFocus: true,

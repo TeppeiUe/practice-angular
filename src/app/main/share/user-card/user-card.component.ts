@@ -3,6 +3,12 @@ import { User } from 'src/app/models/user-params';
 import { AuthService } from 'src/app/services/auth.service';
 import { FollowService } from 'src/app/services/follow.service';
 
+enum buttonType {
+  none,
+  onFollowing,
+  offFollowing,
+}
+
 @Component({
   selector: 'app-user-card',
   templateUrl: './user-card.component.html',
@@ -11,6 +17,7 @@ import { FollowService } from 'src/app/services/follow.service';
 export class UserCardComponent implements OnInit {
   @Input() userList: User[] = [];
   private followingList: number[] = [];
+  private current_user_id = 0;
 
   constructor(
     private auth: AuthService,
@@ -20,6 +27,7 @@ export class UserCardComponent implements OnInit {
   ngOnInit(): void {
     this.auth.user$.subscribe(user => {
       if (user) {
+        this.current_user_id = user.id;
         this.followService.getUserFollowingList(user.id)
         .subscribe(followings => {
           this.followingList = followings.map(f => f.id);
@@ -28,8 +36,13 @@ export class UserCardComponent implements OnInit {
     })
   }
 
-  public setFollowing(user_id: number): boolean {
-    return this.followingList.includes(user_id)
+  public setButtonType(user_id: number): buttonType {
+    if (this.current_user_id === user_id) {
+      return buttonType.none
+    } else {
+      return this.followingList.includes(user_id) ?
+        buttonType.onFollowing : buttonType.offFollowing
+    }
   }
 
   public deleteFollowing(user_id: number) {

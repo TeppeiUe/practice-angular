@@ -11,26 +11,26 @@
           {{ user.user_name }}
         </mat-card-title>
         <span class="spacer"></span>
-        <ng-container
-          *ngIf="setFollowing(user.id); then onFollowing; else offFollowing">
-        </ng-container>
 
-        <ng-template #onFollowing>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="deleteFollowing(user.id)">
-            {{ 'USER.FOLLOWING.NOW' | translate }}
-          </button>
-        </ng-template>
-        <ng-template #offFollowing>
-          <button
-            mat-stroked-button
-            color="primary"
-            (click)="addFollowing(user.id)">
-            {{ 'USER.FOLLOWING.ADD' | translate }}
-          </button>
-        </ng-template>
+        <ng-container [ngSwitch]="setButtonType(user.id)">
+          <ng-container *ngSwitchCase="1">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="deleteFollowing(user.id)">
+              {{ 'USER.FOLLOWING.NOW' | translate }}
+            </button>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="2">
+            <button
+              mat-stroked-button
+              color="primary"
+              (click)="addFollowing(user.id)">
+              {{ 'USER.FOLLOWING.ADD' | translate }}
+            </button>
+          </ng-container>
+        </ng-container>
       </mat-card-header>
 
       <mat-card-content fxLayout="column" fxLayoutAlign="space-between">

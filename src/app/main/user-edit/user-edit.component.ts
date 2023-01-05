@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Observable, Subject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -40,6 +41,7 @@ export class UserEditComponent implements OnInit {
 
   get user_name() { return this.userForm.get('user_name') }
   get profile() { return this.userForm.get('profile') }
+  get image() { return this.userForm.get('image') }
 
   /**
    * modify user information
@@ -82,9 +84,53 @@ export class UserEditComponent implements OnInit {
     const reader = new FileReader();
 
     reader.readAsDataURL(file);
-    reader.onload = () => this.userForm.patchValue({
-      image: reader.result as string
-    });
+    reader.onload = () => {
+      this.resizeImg(reader.result as string).subscribe(image => {
+        this.userForm.patchValue({ image });
+      })
+    }
+  }
+
+  /**
+   * resize image
+   * @param img
+   */
+  private resizeImg(img: string): Observable<string> {
+    const subject = new Subject<string>();
+    const imgReader = new Image();
+    imgReader.src = img;
+
+    imgReader.onload = () => {
+      const maxPx = 100;
+      const ratio = imgReader.width / imgReader.height;
+      const canvas = document.createElement('canvas');
+
+      canvas.width = (ratio > 1 ? 1 : ratio) * maxPx;
+      canvas.height = (ratio > 1 ? 1 / ratio : 1) * maxPx;
+
+      const ctx = canvas.getContext('2d');
+      ctx?.drawImage(
+        imgReader,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+      subject.next(canvas.toDataURL().split(',')[1]);
+      subject.complete();
+    }
+
+    imgReader.onerror = err => subject.error(err);
+
+    return subject.asObservable()
+  }
+
+  /**
+   * set data uri
+   * @param img
+   */
+  protected setImg(img: string): string {
+    return img ? 'data:image/jpeg;base64,' + img : ''
   }
 
 }

@@ -6,7 +6,7 @@
         routerLink="/user/{{ tweetInfo.user?.id }}"
         [mat-dialog-close]
         src="{{ tweetInfo.user?.image ?? '' ?
-          tweetInfo.user?.image :
+          setImg(tweetInfo.user?.image ?? '') :
           './assets/img/baseline_person_black_24dp.png' }}">
       <mat-card-title
         routerLink="/user/{{ tweetInfo.user?.id }}"

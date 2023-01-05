@@ -7,7 +7,8 @@
           routerLink="/user/{{ user.id }}"
           [mat-dialog-close]
           src="{{ user.image ?
-            user.image : './assets/img/baseline_person_black_24dp.png' }}">
+            setImg(user.image) :
+            './assets/img/baseline_person_black_24dp.png' }}">
         <mat-card-title
           routerLink="/user/{{ user.id }}"
           [mat-dialog-close]>

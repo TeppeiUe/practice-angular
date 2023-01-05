@@ -52,7 +52,12 @@
       formControlName="image"
       hidden>
 
-    <mat-form-field>
+    <div fxFlex="row" fxLayoutAlign="space-between" fxLayoutGap="10px">
+      <img
+        mat-card-avatar
+        src="{{ image?.value ?? '' ?
+          setImg(image?.value) : './assets/img/baseline_person_black_24dp.png' }}">
+    <mat-form-field class="extension">
       <ngx-mat-file-input
         formControlName="tmp"
         (change)="onFileChange($event)"
@@ -61,6 +66,7 @@
       </ngx-mat-file-input>
       <mat-icon matSuffix>folder</mat-icon>
     </mat-form-field>
+    </div>
   </form>
 </mat-dialog-content>
 

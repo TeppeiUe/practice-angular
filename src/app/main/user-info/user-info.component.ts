@@ -165,4 +165,12 @@ export class UserInfoComponent implements OnInit {
     .subscribe(tweets => this.tweetList = tweets)
   }
 
+  /**
+   * set data uri
+   * @param img
+   */
+  protected setImg(img: string): string {
+    return img ? 'data:image/jpeg;base64,' + img : ''
+  }
+
 }

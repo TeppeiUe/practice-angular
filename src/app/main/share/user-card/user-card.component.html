@@ -6,7 +6,8 @@
           mat-card-avatar
           routerLink="/user/{{ user.id }}"
           src="{{ user.image ?
-            user.image : './assets/img/baseline_person_black_24dp.png' }}">
+            setImg(user.image) :
+            './assets/img/baseline_person_black_24dp.png' }}">
         <mat-card-title routerLink="/user/{{ user.id }}">
           {{ user.user_name }}
         </mat-card-title>

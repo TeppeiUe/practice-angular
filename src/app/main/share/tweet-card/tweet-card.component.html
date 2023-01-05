@@ -6,7 +6,7 @@
           mat-card-avatar
           routerLink="/user/{{ tweet.user?.id }}"
           src="{{ tweet.user?.image ?? '' ?
-            tweet.user?.image :
+            setImg(tweet.user?.image ?? '') :
             './assets/img/baseline_person_black_24dp.png' }}">
         <mat-card-title routerLink="/user/{{ tweet.user?.id }}">
           {{ tweet.user?.user_name }}

@@ -4,7 +4,8 @@
       <img
         mat-card-avatar
         src="{{ userInfo?.image ?? '' ?
-          userInfo!.image : './assets/img/baseline_person_black_24dp.png' }}">
+          setImg(userInfo!.image) :
+          './assets/img/baseline_person_black_24dp.png' }}">
       <mat-card-title>
         {{ userInfo?.user_name }}
       </mat-card-title>

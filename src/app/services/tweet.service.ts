@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject, switchMap } from 'rxjs';
+import { Observable, of, Subject, switchMap, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Tweet, TweetInfo, TweetList } from '../models/tweet-params';
 
@@ -8,6 +8,7 @@ import { Tweet, TweetInfo, TweetList } from '../models/tweet-params';
   providedIn: 'root'
 })
 export class TweetService {
+  private _tweet$ = new Subject<Tweet|null>();
 
   constructor(
     private http: HttpClient,
@@ -29,9 +30,21 @@ export class TweetService {
       }
     ).pipe(
       switchMap(res => of(res.status === 201 ? res.body?.tweet ?? null : null)),
+      tap(val => this.setTweet(val))
     )
   }
 
+  get tweet$() {
+    return this._tweet$.asObservable()
+  }
+
+  /**
+   * pass new tweet to observer
+   * @param tweet
+   */
+  setTweet(tweet: Tweet|null) {
+    this._tweet$.next(tweet);
+  }
 
   /**
    * http communication for getting tweet detail

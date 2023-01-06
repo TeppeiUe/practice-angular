@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-// import { AuthService } from 'src/app/services/auth.service';
 import { TweetService } from 'src/app/services/tweet.service';
 
 @Component({
@@ -21,7 +20,6 @@ export class TweetAddComponent implements OnInit {
     private tweetService: TweetService,
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<TweetAddComponent>,
-    // private auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -33,17 +31,7 @@ export class TweetAddComponent implements OnInit {
    * create new tweet
    */
   public addTweet(): void {
-    this.tweetService.addTweet(this.tweetForm.value).subscribe(tweet => {
-      // ajax likeな運用を予定
-      // if (tweet) {
-      //   this.auth.user$.subscribe(user => {
-      //     const tweets = user?.tweets ?? [];
-      //     user!.tweets = [...tweets, tweet];
-      //     this.auth.setUser(user);
-      //   });
-      // }
-      console.log(tweet);
-    });
+    this.tweetService.addTweet(this.tweetForm.value).subscribe();
     this.dialogRef.close();
   }
 

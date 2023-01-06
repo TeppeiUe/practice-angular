@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User, UserPut } from 'src/app/models/user-params';
 import { UserService } from 'src/app/services/user.service';
-import { take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { FollowService } from 'src/app/services/follow.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { Tweet } from 'src/app/models/tweet-params';
@@ -10,6 +10,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UserEditComponent } from '../user-edit/user-edit.component';
+import { TweetService } from 'src/app/services/tweet.service';
 
 enum buttonType {
   none,
@@ -23,17 +24,19 @@ enum buttonType {
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent implements OnInit {
+export class UserInfoComponent implements OnInit, OnDestroy {
   public userInfo: User|null = null;
   public userList: User[] = [];
   public tweetList: Tweet[] = [];
   private user_id = 0;
   protected btnType: buttonType = 0;
   private tabIndex = 0;
+  private subscription = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
+    private tweetService: TweetService,
     private followService: FollowService,
     private favoriteService: FavoriteService,
     private auth: AuthService,
@@ -49,10 +52,19 @@ export class UserInfoComponent implements OnInit {
 
     if (this.user_id) {
       this.getUserInfo();
+
       this.auth.user$.subscribe(user => {
         if (user) {
           if (user.id === this.user_id) {
             this.btnType = buttonType.edit;
+
+            // subscription for logged-in user's new tweet
+            this.subscription = this.tweetService.tweet$.subscribe(tweet => {
+              if (tweet && !this.tabIndex) {
+                this.tweetList = [tweet, ...this.tweetList];
+              }
+            });
+
           } else {
             this.followService.getUserFollowerList(this.user_id)
             .subscribe(followers => {
@@ -60,6 +72,7 @@ export class UserInfoComponent implements OnInit {
               this.btnType = followerIdList.includes(user.id) ?
                 buttonType.onFollowing : buttonType.offFollowing;
             });
+
           }
         }
       });
@@ -214,6 +227,12 @@ export class UserInfoComponent implements OnInit {
    */
   protected setImg(img: string): string {
     return img ? 'data:image/jpeg;base64,' + img : ''
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

@@ -3,9 +3,7 @@
     <mat-card-header>
       <img
         mat-card-avatar
-        src="{{ userInfo?.image ?? '' ?
-          setImg(userInfo!.image) :
-          './assets/img/baseline_person_black_24dp.png' }}">
+        src="{{ userInfo?.image ?? '' | setImg }}">
       <mat-card-title>
         {{ userInfo?.user_name }}
       </mat-card-title>

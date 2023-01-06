@@ -79,12 +79,4 @@ export class UserCardComponent implements OnInit {
     })
   }
 
-  /**
-   * set data uri
-   * @param img
-   */
-  protected setImg(img: string): string {
-    return img ? 'data:image/jpeg;base64,' + img : ''
-  }
-
 }

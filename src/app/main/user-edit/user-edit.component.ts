@@ -133,12 +133,4 @@ export class UserEditComponent implements OnInit {
     return subject.asObservable()
   }
 
-  /**
-   * set data uri
-   * @param img
-   */
-  protected setImg(img: string): string {
-    return img ? 'data:image/jpeg;base64,' + img : ''
-  }
-
 }

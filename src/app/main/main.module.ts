@@ -29,6 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UserCardComponent } from './share/user-card/user-card.component';
 import { TweetCardComponent } from './share/tweet-card/tweet-card.component';
 import { FavoriteCardComponent } from './tweet-info/favorite-card/favorite-card.component';
+import { SetImgPipe } from './utility/set-img.pipe';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { FavoriteCardComponent } from './tweet-info/favorite-card/favorite-card.
     TweetAddComponent,
     UserCardComponent,
     TweetCardComponent,
-    FavoriteCardComponent
+    FavoriteCardComponent,
+    SetImgPipe
   ],
   imports: [
     CommonModule,

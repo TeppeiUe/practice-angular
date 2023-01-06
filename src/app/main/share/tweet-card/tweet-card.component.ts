@@ -13,6 +13,7 @@ import { TweetInfoComponent } from '../../tweet-info/tweet-info.component';
 export class TweetCardComponent implements OnInit {
   @Input() tweetList: Tweet[] = [];
   @Input() isHeader = true;
+  @Input() deleteCard = false;
   private current_user_id = 0;
 
   constructor(
@@ -58,8 +59,14 @@ export class TweetCardComponent implements OnInit {
     const target = this.tweetList[ind];
     this.favorite.deleteFavorite(target.id).subscribe(res => {
       if (res) {
-        target.favorites = target.favorites
-          ?.filter(user => user.id !== this.current_user_id);
+        if (this.deleteCard) {
+          // remove target tweet card
+          this.tweetList.splice(ind, 1);
+        } else {
+          // remove only logged-in user's favorite
+          target.favorites = target.favorites
+            ?.filter(user => user.id !== this.current_user_id);
+        }
       }
     });
   }

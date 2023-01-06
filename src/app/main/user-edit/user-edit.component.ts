@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user-params';
 
 @Component({
   selector: 'app-user-edit',
@@ -55,22 +56,29 @@ export class UserEditComponent implements OnInit {
     }).subscribe(res => {
       if (res) {
         this.auth.user$.subscribe(user => {
-          user!.user_name = user_name;
-          user!.profile = profile;
-          user!.image = image;
-          this.auth.setUser(user);
+          if (user) {
+            user = {
+              ...user,
+              ...{
+                user_name,
+                profile,
+                image
+              }
+            } as User;
+            this.auth.setUser(user);
+          }
         });
       }
     });
 
-    this.dialogRef.close();
+    this.dialogRef.close(this.userForm.value);
   }
 
   /**
    * cancel method
    */
   public cancel(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(null);
   }
 
   /**

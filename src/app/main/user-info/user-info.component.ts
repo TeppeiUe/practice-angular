@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/models/user-params';
+import { User, UserPut } from 'src/app/models/user-params';
 import { UserService } from 'src/app/services/user.service';
 import { take } from 'rxjs';
 import { FollowService } from 'src/app/services/follow.service';
@@ -29,6 +29,7 @@ export class UserInfoComponent implements OnInit {
   public tweetList: Tweet[] = [];
   private user_id = 0;
   protected btnType: buttonType = 0;
+  private tabIndex = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -87,10 +88,52 @@ export class UserInfoComponent implements OnInit {
    * open user-edit dialog
    */
   public updateUser() {
-    this.dialog.open(UserEditComponent, {
+    const dialogRef = this.dialog.open(UserEditComponent, {
       width: '600px',
       disableClose: true,
       autoFocus: true,
+    });
+
+    dialogRef.afterClosed().subscribe((user: UserPut|null) => {
+      if (user) {
+        const { user_name, profile, image } = user;
+
+        // update profile information
+        this.userInfo = {
+          ...this.userInfo,
+          ...{
+            user_name,
+            profile,
+            image,
+          }
+        } as User;
+
+        // update current user's tweet in favorite tweets
+        if (this.tabIndex === 3) {
+          this.auth.user$.subscribe(user => {
+            if (user) {
+              const current_user_id = user.id;
+              this.tweetList = this.tweetList.map(tweet => {
+                if (tweet.user_id === current_user_id) {
+                  return {
+                    ...tweet,
+                    user: {
+                      ...tweet.user,
+                      ...{
+                        user_name,
+                        profile,
+                        image,
+                      }
+                    }
+                  } as Tweet
+                } else {
+                  return tweet
+                }
+              });
+            }
+          });
+        }
+      }
     });
   }
 
@@ -99,8 +142,8 @@ export class UserInfoComponent implements OnInit {
    * @param event
    */
   public tabClick(event: MatTabChangeEvent) {
-    const tabIndex = event.index;
-    switch (tabIndex) {
+    this.tabIndex = event.index;
+    switch (this.tabIndex) {
       case 0:
         this.getUserInfo();
         break;

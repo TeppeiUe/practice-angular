@@ -60,7 +60,10 @@
     </app-tweet-card>
   </mat-tab>
   <mat-tab label="{{ 'USER.FOLLOWING.LIST' | translate }}">
-    <app-user-card [userList]="userList"></app-user-card>
+    <app-user-card
+      [userList]="userList"
+      [deleteCard]="!btnType || btnType === 1">
+    </app-user-card>
   </mat-tab>
   <mat-tab label="{{ 'USER.FOLLOWER.LIST' | translate }}">
     <app-user-card [userList]="userList"></app-user-card>
@@ -68,7 +71,7 @@
   <mat-tab label="{{ 'TWEET.FAVORITE.LIST' | translate }}">
     <app-tweet-card
       [tweetList]="tweetList"
-      [deleteCard]="true">
+      [deleteCard]="!btnType || btnType === 1">
     </app-tweet-card>
   </mat-tab>
 </mat-tab-group>

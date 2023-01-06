@@ -16,6 +16,7 @@ enum buttonType {
 })
 export class UserCardComponent implements OnInit {
   @Input() userList: User[] = [];
+  @Input() deleteCard = false;
   private followingList: number[] = []; // following user_id list
   private current_user_id = 0;
 
@@ -57,6 +58,10 @@ export class UserCardComponent implements OnInit {
   public deleteFollowing(user_id: number) {
     this.followService.deleteFollowing(user_id).subscribe(res => {
       if (res) {
+        // remove target user card
+        if (this.deleteCard) {
+          this.userList = this.userList.filter(user => user.id !== user_id);
+        }
         this.followingList = this.followingList.filter(f => f !== user_id);
       }
     })

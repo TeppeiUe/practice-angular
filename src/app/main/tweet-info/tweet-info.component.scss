@@ -1,15 +1,12 @@
-.mat-card {
-  padding: 0;
-}
-
-mat-expansion-panel {
-  width: 100%;
-}
-
+.mat-card,
 .mat-expansion-panel-header {
   padding: 0;
 }
 
 .mat-expansion-panel-header-title {
   justify-content: space-between;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
 }

@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-$shared-card-margin: 0.5%;
-
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +8,7 @@ $shared-card-margin: 0.5%;
 
 :root {
   --header-height: 64px;
+  --shared-card-margin: 0.5%;
 }
 
 html, body { height: 100%; }
@@ -49,13 +48,13 @@ mat-card.user-form {
 }
 
 mat-card.shared-card {
-  width: calc(100% / 3 - 2 * $shared-card-margin);
-  margin: $shared-card-margin;
+  width: calc(100% / 3 - 2 * var(--shared-card-margin));
+  margin: var(--shared-card-margin);
 }
 
-@media screen and (min-width: 1280px) and (max-width: 1919px) {
+@media screen and (min-width: 960px) and (max-width: 1279px) {
   mat-card.shared-card {
-    width: calc(100% / 3 - 2 * $shared-card-margin);
+    width: calc(100% / 2 - 2 * var(--shared-card-margin));
   }
 }
 
@@ -66,7 +65,7 @@ mat-card.shared-card {
     max-width: 90vw;
   }
   mat-card.shared-card {
-    width: calc(100% / 2 - 2 * $shared-card-margin)
+    width: calc(100% / 2 - 2 * var(--shared-card-margin))
   }
 }
 
@@ -77,6 +76,6 @@ mat-card.shared-card {
   mat-dialog-container.mat-dialog-container,
   mat-card.user-form { width: 90vw; }
   mat-card.shared-card {
-    width: calc(100% - 2 * $shared-card-margin);
+    width: calc(100% - 2 * var(--shared-card-margin));
   }
 }

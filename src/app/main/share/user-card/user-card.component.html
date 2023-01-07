@@ -33,7 +33,7 @@
       </mat-card-header>
 
       <mat-card-content fxLayout="column" fxLayoutAlign="space-between">
-        <textarea readonly>{{ user.profile }}</textarea>
+        <textarea class="shared-card" readonly>{{ user.profile }}</textarea>
         <span>
           {{ 'USER.CREATED_AT' | translate }}:
           {{ user.created_at| date: 'yyyy/MM/dd hh:mm' }}</span>

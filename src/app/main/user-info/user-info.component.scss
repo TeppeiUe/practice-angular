@@ -25,10 +25,7 @@ mat-card-header {
   margin-bottom: 0;
 }
 
-textarea {
-  resize: none;
-  border: none;
-  outline: none;
+textarea:read-only {
   height: 100px;
   margin-bottom: 12px;
 }

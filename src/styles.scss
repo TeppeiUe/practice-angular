@@ -22,6 +22,16 @@ span.spacer {
   flex: 1 1 auto;
 }
 
+textarea:read-only {
+  resize: none;
+  border: none;
+  outline: none;
+  &.shared-card {
+    width: 100%;
+    height: 80px;
+  }
+}
+
 mat-dialog-container.mat-dialog-container,
 mat-card.user-form {
   width: 600px;

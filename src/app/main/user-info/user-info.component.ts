@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User, UserPut } from 'src/app/models/user-params';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription, take } from 'rxjs';
@@ -35,13 +35,19 @@ export class UserInfoComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService,
     private tweetService: TweetService,
     private followService: FollowService,
     private favoriteService: FavoriteService,
     private auth: AuthService,
     private dialog: MatDialog,
-  ) { }
+  ) {
+    // the same route doesn't work till reload at default
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
+  }
 
   ngOnInit(): void {
     this.route.paramMap.pipe(

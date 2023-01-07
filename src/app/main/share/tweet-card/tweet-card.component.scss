@@ -30,7 +30,7 @@ textarea {
 }
 
 @media screen and (min-width: 600px) and (max-width: 959px) {
-  mat-card { width: calc(100% - 2 * $margin) }
+  mat-card { width: calc(100% / 2 - 2 * $margin) }
 }
 
 @media screen and (max-width: 599px) {

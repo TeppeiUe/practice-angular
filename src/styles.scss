@@ -18,6 +18,10 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: calc(100% - var(--header-height));
 }
 
+span.spacer {
+  flex: 1 1 auto;
+}
+
 mat-dialog-container.mat-dialog-container,
 mat-card.user-form {
   width: 600px;

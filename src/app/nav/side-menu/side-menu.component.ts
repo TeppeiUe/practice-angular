@@ -29,7 +29,6 @@ export class SideMenuComponent implements OnInit {
    */
   public addTweet() {
     this.dialog.open(TweetAddComponent, {
-      width: '600px',
       disableClose: true,
       autoFocus: true,
     });

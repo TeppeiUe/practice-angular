@@ -102,7 +102,6 @@ export class UserInfoComponent implements OnInit, OnDestroy {
    */
   public updateUser() {
     const dialogRef = this.dialog.open(UserEditComponent, {
-      width: '600px',
       disableClose: true,
       autoFocus: true,
     });

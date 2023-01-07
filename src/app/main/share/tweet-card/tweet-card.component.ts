@@ -34,7 +34,6 @@ export class TweetCardComponent implements OnInit {
    */
   public openTweetInfo(tweet: Tweet) {
     this.dialog.open(TweetInfoComponent, {
-      width: '600px',
       data: tweet,
     })
   }

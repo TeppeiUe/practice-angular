@@ -17,3 +17,9 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 100%;
   height: calc(100% - var(--header-height));
 }
+
+@media screen and (max-width: 599px) {
+  :root {
+    --header-height: 56px;
+  }
+}

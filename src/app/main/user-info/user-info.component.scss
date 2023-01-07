@@ -1,5 +1,10 @@
 $margin: 0.5%;
 
+.container-inner {
+  // 全体のスクロールを抑制
+  overflow: hidden;
+}
+
 ::ng-deep .mat-tab-label {
   width: 25%;
 }
@@ -26,6 +31,11 @@ textarea {
   outline: none;
   height: 100px;
   margin-bottom: 12px;
+}
+
+.mat-tab-group-wrap {
+  flex: 1 1 auto;
+  overflow: scroll;
 }
 
 @media screen and (min-width: 1280px) and (max-width: 1919px) {

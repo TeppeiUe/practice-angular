@@ -1,75 +1,79 @@
-<mat-card class="mat-elevation-z0">
-  <div id="mat-card-inner">
-    <mat-card-header>
-      <img
-        mat-card-avatar
-        src="{{ userInfo?.image ?? '' | setImg }}">
-      <mat-card-title>
-        {{ userInfo?.user_name }}
-      </mat-card-title>
-      <span class="spacer"></span>
+<div class="container-inner" fxLayout="column" fxFill>
+  <mat-card class="mat-elevation-z0">
+    <div id="mat-card-inner">
+      <mat-card-header>
+        <img
+          mat-card-avatar
+          src="{{ userInfo?.image ?? '' | setImg }}">
+        <mat-card-title>
+          {{ userInfo?.user_name }}
+        </mat-card-title>
+        <span class="spacer"></span>
 
-      <ng-container [ngSwitch]="btnType">
-        <ng-container *ngSwitchCase="1">
-          <button
-            mat-icon-button
-            (click)="updateUser()">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </ng-container>
+        <ng-container [ngSwitch]="btnType">
+          <ng-container *ngSwitchCase="1">
+            <button
+              mat-icon-button
+              (click)="updateUser()">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </ng-container>
 
-        <ng-container *ngSwitchCase="2">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="deleteFollowing()">
-            {{ 'USER.FOLLOWING.NOW' | translate }}
-          </button>
-        </ng-container>
+          <ng-container *ngSwitchCase="2">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="deleteFollowing()">
+              {{ 'USER.FOLLOWING.NOW' | translate }}
+            </button>
+          </ng-container>
 
-        <ng-container *ngSwitchCase="3">
-          <button
-            mat-stroked-button
-            color="primary"
-            (click)="addFollowing()">
-            {{ 'USER.FOLLOWING.ADD' | translate }}
-          </button>
+          <ng-container *ngSwitchCase="3">
+            <button
+              mat-stroked-button
+              color="primary"
+              (click)="addFollowing()">
+              {{ 'USER.FOLLOWING.ADD' | translate }}
+            </button>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </mat-card-header>
-    <mat-card-content fxLayout="column" fxLayoutAlign="space-between">
-      <span>
-        {{ 'USER.PROFILE' | translate }}
-      </span>
-      <textarea readonly>{{ userInfo?.profile }}</textarea>
-      <span>
-        {{ 'USER.CREATED_AT' | translate }}
-        {{ userInfo?.created_at | date: 'yyyy/MM/dd hh:mm' }}
-      </span>
-    </mat-card-content>
+      </mat-card-header>
+      <mat-card-content fxLayout="column" fxLayoutAlign="space-between">
+        <span>
+          {{ 'USER.PROFILE' | translate }}
+        </span>
+        <textarea readonly>{{ userInfo?.profile }}</textarea>
+        <span>
+          {{ 'USER.CREATED_AT' | translate }}
+          {{ userInfo?.created_at | date: 'yyyy/MM/dd hh:mm' }}
+        </span>
+      </mat-card-content>
+    </div>
+  </mat-card>
+
+  <div class="mat-tab-group-wrap">
+    <mat-tab-group (selectedTabChange)="tabClick($event)" fxFill>
+      <mat-tab label="{{ 'TWEET.LIST' | translate }}">
+        <app-tweet-card
+          [tweetList]="tweetList"
+          [isHeader]="false">
+        </app-tweet-card>
+      </mat-tab>
+      <mat-tab label="{{ 'USER.FOLLOWING.LIST' | translate }}">
+        <app-user-card
+          [userList]="userList"
+          [deleteCard]="!btnType || btnType === 1">
+        </app-user-card>
+      </mat-tab>
+      <mat-tab label="{{ 'USER.FOLLOWER.LIST' | translate }}">
+        <app-user-card [userList]="userList"></app-user-card>
+      </mat-tab>
+      <mat-tab label="{{ 'TWEET.FAVORITE.LIST' | translate }}">
+        <app-tweet-card
+          [tweetList]="tweetList"
+          [deleteCard]="!btnType || btnType === 1">
+        </app-tweet-card>
+      </mat-tab>
+    </mat-tab-group>
   </div>
-</mat-card>
-
-<mat-tab-group (selectedTabChange)="tabClick($event)">
-  <mat-tab label="{{ 'TWEET.LIST' | translate }}">
-    <app-tweet-card
-      [tweetList]="tweetList"
-      [isHeader]="false">
-    </app-tweet-card>
-  </mat-tab>
-  <mat-tab label="{{ 'USER.FOLLOWING.LIST' | translate }}">
-    <app-user-card
-      [userList]="userList"
-      [deleteCard]="!btnType || btnType === 1">
-    </app-user-card>
-  </mat-tab>
-  <mat-tab label="{{ 'USER.FOLLOWER.LIST' | translate }}">
-    <app-user-card [userList]="userList"></app-user-card>
-  </mat-tab>
-  <mat-tab label="{{ 'TWEET.FAVORITE.LIST' | translate }}">
-    <app-tweet-card
-      [tweetList]="tweetList"
-      [deleteCard]="!btnType || btnType === 1">
-    </app-tweet-card>
-  </mat-tab>
-</mat-tab-group>
+</div>

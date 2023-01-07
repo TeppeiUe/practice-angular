@@ -32,6 +32,10 @@ textarea:read-only {
   }
 }
 
+mat-card-header.mat-card-header {
+  margin-bottom: 12px;
+}
+
 mat-dialog-container.mat-dialog-container,
 mat-card.user-form {
   width: 600px;

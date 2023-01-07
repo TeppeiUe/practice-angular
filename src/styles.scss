@@ -22,6 +22,10 @@ span.spacer {
   flex: 1 1 auto;
 }
 
+span.tweet-created_at {
+  margin-right: 16px;
+}
+
 textarea:read-only {
   resize: none;
   border: none;

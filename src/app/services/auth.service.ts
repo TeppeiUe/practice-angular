@@ -78,7 +78,10 @@ export class AuthService {
         observe: 'response'
       }
     ).pipe(
-      switchMap(res => of(res.status === 204))
+      switchMap(res => of(res.status === 204)),
+      tap(val => {
+        if (val) this.setUser(null)
+      })
     )
   }
 

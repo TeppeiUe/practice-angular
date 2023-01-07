@@ -1,6 +1,6 @@
 <div fxLayout="row wrap">
   <ng-container *ngFor="let tweet of tweetList; index as ind">
-    <mat-card (click)="openTweetInfo(tweet)">
+    <mat-card class="shared-card" (click)="openTweetInfo(tweet)">
       <mat-card-header *ngIf="isHeader">
         <img
           mat-card-avatar

@@ -8,6 +8,9 @@ import { SideMenuComponent } from './side-menu/side-menu.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -21,6 +24,9 @@ import { TranslateModule } from '@ngx-translate/core';
     MatToolbarModule,
     MatListModule,
     MatIconModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatButtonModule,
     RouterModule,
     TranslateModule,
   ],

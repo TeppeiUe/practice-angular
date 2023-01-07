@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BreakpointService } from '../services/breakpoint.service';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private breakpoint: BreakpointService,
+  ) { }
 
   ngOnInit(): void {
   }
+
+  get isHandset$() { return this.breakpoint.isHandset$ }
 
 }

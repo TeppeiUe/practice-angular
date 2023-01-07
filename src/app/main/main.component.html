@@ -1,7 +1,8 @@
 <mat-sidenav-container class="container">
-  <mat-sidenav class="side-content" mode="side" opened>
+  <mat-sidenav class="side-content" mode="side" [opened]="!(isHandset$|async)">
     <app-side-menu></app-side-menu>
   </mat-sidenav>
+
   <mat-sidenav-content class="main-content">
     <router-outlet></router-outlet>
   </mat-sidenav-content>

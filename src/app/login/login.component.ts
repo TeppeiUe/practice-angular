@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
@@ -10,9 +10,18 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  private _email = new FormControl('', [
+    Validators.email,
+    Validators.required
+  ]);
+
+  private _password = new FormControl('', [
+    Validators.required
+  ]);
+  
   public userForm: FormGroup = this.fb.group({
-    email: ['', Validators.email], // requireとemailやpatternは同時に使用不可(htmlに記述で可能)
-    password: ['', Validators.required],
+    email: this._email, 
+    password: this._password,
   });
 
   private subscriptions = new Subscription();
@@ -26,8 +35,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  get email() { return this.userForm.get('email') }
-  get password() { return this.userForm.get('password') }
+  get email() { return this._email }
+  get password() { return this._password }
 
   /**
    * login method

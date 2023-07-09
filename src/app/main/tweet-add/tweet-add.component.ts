@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TweetService } from 'src/app/services/tweet.service';
 
@@ -9,12 +9,15 @@ import { TweetService } from 'src/app/services/tweet.service';
   styleUrls: ['./tweet-add.component.scss']
 })
 export class TweetAddComponent implements OnInit {
+  private _message = new FormControl('', [
+    Validators.required,
+    Validators.maxLength(140),
+  ]);
+
   public tweetForm: FormGroup = this.fb.group({
-    message: ['', [
-      Validators.required,
-      Validators.maxLength(140),
-    ]],
+    message: this._message
   });
+  
 
   constructor(
     private tweetService: TweetService,
@@ -25,7 +28,7 @@ export class TweetAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get message() { return this.tweetForm.get('message') }
+  get message() { return this._message }
 
   /**
    * create new tweet

@@ -81,7 +81,8 @@ export class AuthService {
       switchMap(res => of(res.status === 204)),
       tap(val => {
         if (val) this.setUser(null)
-      })
+      }),
+      catchError(() => of(false)),
     )
   }
 

@@ -14,14 +14,14 @@
             formControlName="email"
             placeholder="{{ 'USER.EMAIL' | translate }}">
           <mat-error
-            *ngIf="email.errors !== null
-              && email.errors?.['required'] === true">
+            *ngIf="email.errors !== null &&
+            email.errors?.['required'] === true">
             {{ 'USER.EMAIL' | translate }}
             {{ 'VALIDATOR.REQUIRED' | translate }}
           </mat-error>
           <mat-error
-            *ngIf="email.errors !== null
-              && email.errors?.['email'] === true">
+            *ngIf="email.errors !== null &&
+            email.errors?.['email'] === true">
             {{ 'USER.EMAIL' | translate }}
             {{ 'VALIDATOR.INVALID' | translate }}
           </mat-error>
@@ -35,8 +35,8 @@
             formControlName="password"
             placeholder="{{ 'USER.PASSWORD' | translate }}">
           <mat-error
-            *ngIf="password.errors !== null
-              && password.errors?.['required'] === true">
+            *ngIf="password.errors !== null &&
+            password.errors?.['required'] === true">
             {{ 'USER.PASSWORD' | translate }}
             {{ 'VALIDATOR.REQUIRED' | translate }}
           </mat-error>

@@ -13,19 +13,19 @@
         placeholder="{{ 'USER.USER_NAME' | translate }}"
         required>
       <mat-error
-        *ngIf="user_name?.errors !== null
-          && user_name?.errors?.['required'] === true">
+        *ngIf="user_name.errors !== null &&
+        user_name.errors?.['required'] === true">
         {{ 'USER.USER_NAME' | translate }}
         {{ 'VALIDATOR.REQUIRED' | translate }}
       </mat-error>
       <mat-error
-        *ngIf="user_name?.errors !== null
-          && user_name?.errors?.['maxlength'] !== undefined">
+        *ngIf="user_name.errors !== null &&
+        user_name.errors['maxlength'] !== undefined">
         {{ 'USER.USER_NAME' | translate }}
         {{
           'VALIDATOR.LESS_THAN' |
           translate: {
-            val: user_name?.errors?.['maxlength']?.['requiredLength']
+            val: user_name.errors['maxlength']?.['requiredLength']
           }
         }}
       </mat-error>
@@ -35,13 +35,16 @@
       <textarea
         matInput
         formControlName="profile"
-        placeholder="{{ 'USER.PROFILE' | translate }}"></textarea>
-      <mat-error>
+        placeholder="{{ 'USER.PROFILE' | translate }}">
+      </textarea>
+      <mat-error
+        *ngIf="profile.errors !== null &&
+        profile.errors['maxlength'] !== undefined">
         {{ 'USER.PROFILE' | translate }}
         {{
           'VALIDATOR.LESS_THAN' |
           translate: {
-            val: profile?.errors?.['maxlength']?.['requiredLength']
+            val: profile.errors['maxlength']?.['requiredLength']
           }
         }}
       </mat-error>

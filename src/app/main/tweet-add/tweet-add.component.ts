@@ -17,7 +17,7 @@ export class TweetAddComponent implements OnInit {
   public tweetForm: FormGroup = this.fb.group({
     message: this._message
   });
-  
+
 
   constructor(
     private tweetService: TweetService,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,11 +12,22 @@ import { User } from 'src/app/models/user-params';
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
+
+  private _user_name = new FormControl('', [
+    Validators.maxLength(16),
+  ]);
+
+  private _profile = new FormControl('', [
+    Validators.maxLength(140),
+  ]);
+
+  private _image = new FormControl('');
+
   public userForm: FormGroup = this.fb.group({
-    user_name: ['', Validators.maxLength(16)],
-    profile: ['', Validators.maxLength(140)],
-    image: [''],
-    tmp:[''], // temporary form control for file upload
+    user_name: this._user_name,
+    profile: this._profile,
+    image: this._image,
+    tmp: [''], // temporary form control for file upload
   });
 
   constructor(
@@ -40,9 +51,9 @@ export class UserEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get user_name() { return this.userForm.get('user_name') }
-  get profile() { return this.userForm.get('profile') }
-  get image() { return this.userForm.get('image') }
+  get user_name() { return this._user_name }
+  get profile() { return this._profile }
+  get image() { return this._image }
 
   /**
    * modify user information

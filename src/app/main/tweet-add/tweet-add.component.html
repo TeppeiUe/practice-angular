@@ -8,16 +8,17 @@
       <textarea
         matInput
         formControlName="message"
-        placeholder="{{ 'TWEET.MESSAGE' | translate }}"></textarea>
-        <mat-error
-        *ngIf="message.errors !== null
-          && message.errors?.['required'] === true">
+        placeholder="{{ 'TWEET.MESSAGE' | translate }}">
+      </textarea>
+      <mat-error
+        *ngIf="message.errors !== null &&
+        message.errors['required'] === true">
         {{ 'TWEET.MESSAGE' | translate }}
         {{ 'VALIDATOR.REQUIRED' | translate }}
       </mat-error>
       <mat-error
-        *ngIf="message.errors !== null
-          && message.errors?.['maxlength'] !== undefined">
+        *ngIf="message.errors !== null &&
+        message.errors['maxlength'] !== undefined">
         {{ 'TWEET.MESSAGE' | translate }}
         {{
           'VALIDATOR.LESS_THAN' |

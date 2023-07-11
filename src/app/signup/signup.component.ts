@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
@@ -10,10 +10,22 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit, OnDestroy {
+  private _user_name = new FormControl('', [
+    Validators.maxLength(16),
+  ]);
+
+  private _email = new FormControl('', [
+    Validators.email,
+  ]);
+
+  private _password = new FormControl('', [
+    Validators.required,
+  ]);
+
   public userForm: FormGroup = this.fb.group({
-    user_name: ['', Validators.maxLength(16)],
-    email: ['', Validators.email],
-    password: ['', Validators.required],
+    user_name: this._user_name,
+    email: this._email,
+    password: this._password,
   });
   private subscriptions = new Subscription();
 
@@ -26,9 +38,9 @@ export class SignupComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  get user_name() { return this.userForm.get('user_name') }
-  get email() { return this.userForm.get('email') }
-  get password() { return this.userForm.get('password') }
+  get user_name() { return this._user_name }
+  get email() { return this._email }
+  get password() { return this._password }
 
   /**
    * create new user

@@ -4,10 +4,10 @@
       <mat-card-header *ngIf="isHeader">
         <img
           mat-card-avatar
-          routerLink="/user/{{ tweet.user?.id }}"
-          src="{{ tweet.user?.image ?? '' | setImg }}">
-        <mat-card-title routerLink="/user/{{ tweet.user?.id }}">
-          {{ tweet.user?.user_name }}
+          routerLink="/user/{{ tweet.user.id }}"
+          src="{{ tweet.user.image | setImg }}">
+        <mat-card-title routerLink="/user/{{ tweet.user.id }}">
+          {{ tweet.user.user_name }}
         </mat-card-title>
       </mat-card-header>
 
@@ -20,7 +20,7 @@
           <ng-container
             *ngIf="setFavorite(tweet); then onFavorite; else offFavorite">
           </ng-container>
-          {{ tweet.favorites?.length ?? 0 }}
+          {{ tweet.favorites.length }}
         </span>
         <span class="tweet-created_at" fxLayoutAlign="center center">
           {{ tweet.created_at| date: 'yyyy/MM/dd hh:mm' }}

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User, UserPut } from 'src/app/models/user-params';
+import { User, UserBase, UserEditForm } from 'src/app/models/user-params';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription, take } from 'rxjs';
 import { FollowService } from 'src/app/services/follow.service';
@@ -25,8 +25,11 @@ enum buttonType {
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit, OnDestroy {
-  public userInfo: User|null = null;
-  public userList: User[] = [];
+  /** user information in this page */
+  public userInfo: UserBase | null = null;
+  /** for followers & followings user list */
+  public userList: UserBase[] = [];
+  /** for tweets & favorites tweet list */
   public tweetList: Tweet[] = [];
   private user_id = 0;
   protected btnType: buttonType = 0;
@@ -112,18 +115,12 @@ export class UserInfoComponent implements OnInit, OnDestroy {
       autoFocus: true,
     });
 
-    dialogRef.afterClosed().subscribe((user: UserPut|null) => {
-      if (user) {
-        const { user_name, profile, image } = user;
-
+    dialogRef.afterClosed().subscribe((userEditForm: UserEditForm | null) => {
+      if (userEditForm) {
         // update profile information
         this.userInfo = {
           ...this.userInfo,
-          ...{
-            user_name,
-            profile,
-            image,
-          }
+          ...userEditForm
         } as User;
 
         // update current user's tweet in favorite tweets
@@ -133,20 +130,9 @@ export class UserInfoComponent implements OnInit, OnDestroy {
               const current_user_id = user.id;
               this.tweetList = this.tweetList.map(tweet => {
                 if (tweet.user_id === current_user_id) {
-                  return {
-                    ...tweet,
-                    user: {
-                      ...tweet.user,
-                      ...{
-                        user_name,
-                        profile,
-                        image,
-                      }
-                    }
-                  } as Tweet
-                } else {
-                  return tweet
+                  Object.assign(tweet, userEditForm);
                 }
+                return tweet
               });
             }
           });
@@ -183,21 +169,14 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   private getUserInfo(): void {
     this.userService.getUserInfo(this.user_id)
     .subscribe(user => {
-      if (user && user.tweets !== undefined) {
-        const { id, user_name, profile, image } = user;
-        this.tweetList = user.tweets?.map(tweet => {
+      if (user) {
+        this.tweetList = user.tweets.map(tweet => {
           return {
             ...tweet,
-            user: {
-              id,
-              user_name,
-              profile,
-              image,
-            }
+            ... { user }
           }
         })
       }
-      delete user?.tweets;
       this.userInfo = user;
     })
   }

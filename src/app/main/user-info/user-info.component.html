@@ -1,12 +1,12 @@
 <div class="container-inner" fxLayout="column" fxFill>
   <mat-card class="mat-elevation-z0">
-    <div id="mat-card-inner">
+    <div id="mat-card-inner" *ngIf="userInfo">
       <mat-card-header>
         <img
           mat-card-avatar
-          src="{{ userInfo?.image ?? '' | setImg }}">
+          src="{{ userInfo.image | setImg }}">
         <mat-card-title>
-          {{ userInfo?.user_name }}
+          {{ userInfo.user_name }}
         </mat-card-title>
         <span class="spacer"></span>
 
@@ -42,10 +42,10 @@
         <span>
           {{ 'USER.PROFILE' | translate }}
         </span>
-        <textarea readonly>{{ userInfo?.profile }}</textarea>
+        <textarea readonly>{{ userInfo.profile }}</textarea>
         <span>
           {{ 'USER.CREATED_AT' | translate }}
-          {{ userInfo?.created_at | date: 'yyyy/MM/dd hh:mm' }}
+          {{ userInfo.created_at | date: 'yyyy/MM/dd hh:mm' }}
         </span>
       </mat-card-content>
     </div>

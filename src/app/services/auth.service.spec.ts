@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
-import { User, UserAuth } from '../models/user-params';
+import { User, UserLoginForm } from '../models/user-params';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from 'src/environments/environment';
 
@@ -10,12 +10,12 @@ describe('AuthService', () => {
   let httpTestingController: HttpTestingController;
 
   const { apiUrl } = environment;
-  const user: User = {
+  const user = {
     id: 1,
     user_name: '',
     profile: '',
     image: '',
-  };
+  } as User;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -51,7 +51,7 @@ describe('AuthService', () => {
     });
 
     it('should add options to HttpClient request', () => {
-      service.login({} as UserAuth).subscribe();
+      service.login({} as UserLoginForm).subscribe();
       const { request } = httpTestingController.expectOne(() => true);
       expect(request.url).toEqual(apiUrl + '/login');
       expect(request.method).toEqual('POST');
@@ -62,7 +62,7 @@ describe('AuthService', () => {
     });
 
     it('should return user after HttpClient request successfully', () => {
-      service.login({} as UserAuth).subscribe(res => {
+      service.login({} as UserLoginForm).subscribe(res => {
         expect(res).toEqual(user);
       });
       httpTestingController.expectOne({}).flush({ user });
@@ -73,7 +73,7 @@ describe('AuthService', () => {
 
     it('should return null after HttpClient request successfully', () => {
       service.setUser(user);
-      service.login({} as UserAuth).subscribe(res => {
+      service.login({} as UserLoginForm).subscribe(res => {
         expect(res).toEqual(null);
       });
       // UserInfo型のレスポンスでない場合
@@ -84,7 +84,7 @@ describe('AuthService', () => {
     });
 
     it('should return null after HttpClient request unsuccessfully', () => {
-      service.login({} as UserAuth).subscribe(res => {
+      service.login({} as UserLoginForm).subscribe(res => {
         expect(res).toEqual(null);
       });
       httpTestingController.expectOne({}).flush({}, {

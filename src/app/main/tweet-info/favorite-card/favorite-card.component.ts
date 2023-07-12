@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user-params';
+import { UserBase } from 'src/app/models/user-params';
 
 @Component({
   selector: 'app-favorite-card',
@@ -7,7 +7,7 @@ import { User } from 'src/app/models/user-params';
   styleUrls: ['./favorite-card.component.scss']
 })
 export class FavoriteCardComponent implements OnInit {
-  @Input() userList: User[] = [];
+  @Input() userList: UserBase[] = [];
 
   constructor() { }
 

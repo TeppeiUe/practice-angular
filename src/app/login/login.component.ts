@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { UserLoginForm } from '../models/user-params';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +44,8 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   public login(): void {
     this.subscriptions.add(
-      this.authService.login(this.userForm.value).subscribe(user => {
+      this.authService.login(this.userForm.value as UserLoginForm)
+      .subscribe(user => {
         if (user) {
           this.router.navigate(['']);
         } else {

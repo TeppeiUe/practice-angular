@@ -13,19 +13,19 @@ describe('HomeComponent', () => {
   let authService: jasmine.SpyObj<AuthService>;
   let tweetService: jasmine.SpyObj<TweetService>;
 
-  const user: User = {
+  const user = {
     id: 1,
     user_name: '',
     profile: '',
     image: '',
-  };
+  } as User;
 
-  const tweet: Tweet = {
+  const tweet = {
     id: 1,
     message: '',
     user_id: 1,
     created_at: new Date(),
-  }
+  } as Tweet;
 
   beforeEach(async () => {
     authService = jasmine.createSpyObj('AuthService', [], {

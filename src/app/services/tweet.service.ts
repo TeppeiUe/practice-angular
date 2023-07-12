@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject, switchMap, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Tweet, TweetInfo, TweetList } from '../models/tweet-params';
+import { Tweet, TweetAddForm, TweetInfo, TweetList } from '../models/tweet-params';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,12 @@ export class TweetService {
 
   /**
    * http communication for creating new tweet
-   * @param tweet tweet message
+   * @param tweetAddForm tweet message
    */
-  public addTweet(tweet: Tweet) {
+  public addTweet(tweetAddForm: TweetAddForm) {
     return this.http.post<TweetInfo>(
       environment.apiUrl + '/tweet',
-      tweet, {
+      tweetAddForm, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),

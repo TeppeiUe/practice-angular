@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { TweetAddForm } from 'src/app/models/tweet-params';
 import { TweetService } from 'src/app/services/tweet.service';
 
 @Component({
@@ -34,7 +35,9 @@ export class TweetAddComponent implements OnInit {
    * create new tweet
    */
   public addTweet(): void {
-    this.tweetService.addTweet(this.tweetForm.value).subscribe();
+    this.tweetService.addTweet(
+      this.tweetForm.value as TweetAddForm
+    ).subscribe();
     this.dialogRef.close();
   }
 

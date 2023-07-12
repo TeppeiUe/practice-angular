@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, UserInfo, UserList, UserPut } from '../models/user-params';
+import {
+  User,
+  UserInfo,
+  UserList,
+  UserAddForm,
+  UserEditForm,
+  UserBase,
+} from '../models/user-params';
 import { Observable, of, Subject, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -15,13 +22,13 @@ export class UserService {
 
   /**
    * http communication for creating new user
-   * @param user
+   * @param userAddForm
    */
-  public addUser(user: User): Observable<User|null> {
+  public addUser(userAddForm: UserAddForm): Observable<User|null> {
     const subject = new Subject<User|null>();
     const subscription = this.http.post<UserInfo>(
       environment.apiUrl + '/user',
-      user, {
+      userAddForm, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),
@@ -63,8 +70,8 @@ export class UserService {
   /**
    * http communication for getting user list
    */
-  public getUserList(): Observable<User[]> {
-    const subject = new Subject<User[]>();
+  public getUserList(): Observable<UserBase[]> {
+    const subject = new Subject<UserBase[]>();
     const subscription = this.http.get<UserList>(
       environment.apiUrl + '/users', {
         observe: 'response',
@@ -82,12 +89,12 @@ export class UserService {
 
   /**
    * http communication for updating user information
-   * @param user
+   * @param userEditForm
    */
-  public modifyUserInfo(user: UserPut): Observable<boolean> {
+  public modifyUserInfo(userEditForm: UserEditForm): Observable<boolean> {
     return this.http.put(
       environment.apiUrl + '/user',
-      user, {
+      userEditForm, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),

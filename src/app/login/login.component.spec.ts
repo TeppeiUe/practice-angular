@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { User } from '../models/user-params';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -87,7 +88,7 @@ describe('LoginComponent', () => {
           user_name: '',
           profile: '',
           image: '',
-        }));
+        } as User));
         component.login();
         // expect(router.navigate).toHaveBeenCalled();
         expect(router.navigate).toHaveBeenCalledWith(['']);

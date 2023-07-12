@@ -13,7 +13,7 @@ import {
   tap
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User, UserInfo, UserAuth } from '../models/user-params';
+import { User, UserInfo, UserLoginForm } from '../models/user-params';
 
 @Injectable({
   providedIn: 'root'
@@ -39,13 +39,13 @@ export class AuthService {
 
   /**
    * http communication for login
-   * @param userAuth
+   * @param userLoginForm
    */
-  login(userAuth: UserAuth) {
+  login(userLoginForm: UserLoginForm) {
     const subject = new Subject<User|null>();
     const subscription = this.http.post<UserInfo>(
       environment.apiUrl + '/login',
-      userAuth, {
+      userLoginForm, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),

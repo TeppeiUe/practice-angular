@@ -57,14 +57,9 @@ export class TweetInfoComponent implements OnInit {
     this.favorite.addFavorite(this.tweetInfo.id).subscribe(res => {
       this.auth.user$.subscribe(user => {
         if (user) {
-          const { id, user_name, profile, image } = user;
-          this.tweetInfo!.favorites = [
-            ...(this.tweetInfo?.favorites ?? []), {
-              id,
-              user_name,
-              profile,
-              image
-            }
+          this.tweetInfo.favorites = [
+            ...(this.tweetInfo.favorites ?? []),
+            user,
           ];
         }
       });

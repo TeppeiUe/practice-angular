@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user-params';
+import { UserBase } from 'src/app/models/user-params';
 import { AuthService } from 'src/app/services/auth.service';
 import { FollowService } from 'src/app/services/follow.service';
 
@@ -15,7 +15,7 @@ enum buttonType {
   styleUrls: ['./user-card.component.scss']
 })
 export class UserCardComponent implements OnInit {
-  @Input() userList: User[] = [];
+  @Input() userList: UserBase[] = [];
   @Input() deleteCard = false;
   private followingList: number[] = []; // following user_id list
   private current_user_id = 0;

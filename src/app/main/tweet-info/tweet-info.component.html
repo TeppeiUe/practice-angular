@@ -3,13 +3,13 @@
     <mat-card-header>
       <img
         mat-card-avatar
-        routerLink="/user/{{ tweetInfo.user?.id }}"
+        routerLink="/user/{{ tweetInfo.user.id }}"
         [mat-dialog-close]
-        src="{{ tweetInfo.user?.image ?? '' | setImg }}">
+        src="{{ tweetInfo.user.image | setImg }}">
       <mat-card-title
-        routerLink="/user/{{ tweetInfo.user?.id }}"
+        routerLink="/user/{{ tweetInfo.user.id }}"
         [mat-dialog-close]>
-        {{ tweetInfo.user?.user_name }}
+        {{ tweetInfo.user.user_name }}
       </mat-card-title>
     </mat-card-header>
 
@@ -28,7 +28,7 @@
                   *ngIf="setFavorite(tweetInfo);
                     then onFavorite; else offFavorite">
                 </ng-container>
-                {{ tweetInfo.favorites?.length ?? 0 }}
+                {{ tweetInfo.favorites.length }}
               </span>
               <span class="tweet-created_at" fxLayoutAlign="center center">
                 {{ tweetInfo.created_at | date: 'yyyy/MM/dd hh:mm' }}
@@ -55,7 +55,7 @@
           </mat-expansion-panel-header>
           <app-favorite-card
             *ngIf="panelOpenState"
-            [userList]="tweetInfo.favorites ?? []"></app-favorite-card>
+            [userList]="tweetInfo.favorites"></app-favorite-card>
         </mat-expansion-panel>
       </mat-accordion>
     </mat-card-content>

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User, UserList } from '../models/user-params';
+import { User, UserBase, UserList } from '../models/user-params';
 
 @Injectable({
   providedIn: 'root'
@@ -51,8 +51,8 @@ export class FollowService {
    * http communication for getting following user list
    * @param user_id
    */
-  public getUserFollowingList(user_id: number): Observable<User[]> {
-    const subject = new Subject<User[]>();
+  public getUserFollowingList(user_id: number): Observable<UserBase[]> {
+    const subject = new Subject<UserBase[]>();
     const subscription = this.http.get<UserList>(
       environment.apiUrl + `/user/${user_id}/followings`, {
         observe: 'response'
@@ -72,8 +72,8 @@ export class FollowService {
    * http communication for getting follower user list
    * @param user_id
    */
-  public getUserFollowerList(user_id: number): Observable<User[]> {
-    const subject = new Subject<User[]>();
+  public getUserFollowerList(user_id: number): Observable<UserBase[]> {
+    const subject = new Subject<UserBase[]>();
     const subscription = this.http.get<UserList>(
       environment.apiUrl + `/user/${user_id}/followers`, {
         observe: 'response'

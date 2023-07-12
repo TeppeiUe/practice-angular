@@ -81,14 +81,9 @@ export class TweetCardComponent implements OnInit {
     this.favorite.addFavorite(target.id).subscribe(res => {
       this.auth.user$.subscribe(user => {
         if (user) {
-          const { id, user_name, profile, image } = user;
           target.favorites = [
-            ...(target.favorites ?? []), {
-              id,
-              user_name,
-              profile,
-              image
-            }
+            ...(target.favorites ?? []),
+            user
           ];
         }
       });
